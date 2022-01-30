@@ -40,9 +40,9 @@ public class Utils {
      */
     public static void sendConfigMessageF(String str, String toBeReplaced, String toReplace, CommandSender sender) {
         try {
-            sender.sendMessage(Color(Objects.requireNonNull(Global.plugin.getConfig().getString(str)).replaceAll(toBeReplaced, toReplace)));
+            sender.sendMessage(Color(Objects.requireNonNull(Global.langConfig.getConfig().getString(str)).replaceAll(toBeReplaced, toReplace)));
         } catch (Exception e) {
-            Logger.severe("Check for config updates: &ahttps://github.com/FranciscoDadone/AnchorSell/blob/main/src/main/resources/config.yml");
+            Logger.severe("Check for config updates: &ahttps://github.com/FranciscoDadone/StaffChatLite/tree/master/src/main/resources/lang");
         }
     }
 
@@ -55,7 +55,7 @@ public class Utils {
         try {
             sender.sendMessage(Color(Objects.requireNonNull(Global.langConfig.getConfig().getString(path))));
         } catch (Exception e) {
-            Logger.severe("Check for config updates: &ahttps://github.com/FranciscoDadone/AnchorSell/blob/main/src/main/resources/config.yml");
+            Logger.severe("Check for config updates: &ahttps://github.com/FranciscoDadone/StaffChatLite/tree/master/src/main/resources/lang");
         }
     }
 
@@ -70,7 +70,7 @@ public class Utils {
                 sender.sendMessage(Utils.Color(line));
             }
         } catch (Exception e) {
-            Logger.severe("Check for config updates: &ahttps://github.com/FranciscoDadone/AnchorSell/blob/main/src/main/resources/config.yml");
+            Logger.severe("Check for config updates: &ahttps://github.com/FranciscoDadone/StaffChatLite/tree/master/src/main/resources/lang");
         }
     }
 

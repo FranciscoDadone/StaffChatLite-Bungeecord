@@ -6,6 +6,7 @@ import com.franciscodadone.staffchatlite.storage.Global;
 import com.franciscodadone.staffchatlite.thirdparty.Metrics;
 import com.franciscodadone.staffchatlite.util.Logger;
 import com.franciscodadone.staffchatlite.util.UpdateChecker;
+import com.franciscodadone.staffchatlite.util.Utils;
 import com.tchristofferson.configupdater.ConfigUpdater;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -81,6 +82,9 @@ public final class StaffChatLite extends JavaPlugin {
         // // Loading commands // //
         Objects.requireNonNull(this.getCommand("sc")).setExecutor(new CommandManager());
         Objects.requireNonNull(this.getCommand("staffchat")).setExecutor(new CommandManager());
+        Objects.requireNonNull(this.getCommand("schelp")).setExecutor(new CommandManager());
+        Objects.requireNonNull(this.getCommand("scadmin")).setExecutor(new CommandManager());
+        Objects.requireNonNull(this.getCommand("sct")).setExecutor(new CommandManager());
 
 
         // Setup global variables such as lang config.

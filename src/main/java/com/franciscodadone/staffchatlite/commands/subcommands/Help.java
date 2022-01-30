@@ -37,6 +37,8 @@ public class Help extends SubCommands {
     public void perform(CommandSender sender, String[] args) {
         if(sender.hasPermission(getPermission())) {
             Utils.sendConfigMultilineMessage("help-message", sender);
+        } else {
+            Utils.noPermission(getPermission(), sender);
         }
     }
 }

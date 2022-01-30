@@ -38,11 +38,15 @@ public class Toggle extends SubCommands {
 
     @Override
     public void perform(CommandSender sender, String[] args) {
-        ChatManager.toggleStaffChat((Player) sender);
-        if(Global.playersToggledStaffChat.contains((Player)sender)) {
-            sender.sendMessage(Utils.Color(Global.langConfig.getConfig().getString("prefix") + Global.langConfig.getConfig().getString("toggle-on")));
+        if(sender.hasPermission(getPermission())) {
+            ChatManager.toggleStaffChat((Player) sender);
+            if(Global.playersToggledStaffChat.contains((Player)sender)) {
+                sender.sendMessage(Utils.Color(Global.langConfig.getConfig().getString("prefix") + Global.langConfig.getConfig().getString("toggle-on")));
+            } else {
+                sender.sendMessage(Utils.Color(Global.langConfig.getConfig().getString("prefix") + Global.langConfig.getConfig().getString("toggle-off")));
+            }
         } else {
-            sender.sendMessage(Utils.Color(Global.langConfig.getConfig().getString("prefix") + Global.langConfig.getConfig().getString("toggle-off")));
+            Utils.noPermission(getPermission(), sender);
         }
     }
 }
