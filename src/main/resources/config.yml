@@ -1,1 +1,3 @@
 lang-file: "English.yml"
+
+chat-style: "%prefix% &c%player%&f: %message%"

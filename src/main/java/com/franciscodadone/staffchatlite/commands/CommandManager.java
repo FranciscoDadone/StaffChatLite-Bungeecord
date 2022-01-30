@@ -1,8 +1,11 @@
 package com.franciscodadone.staffchatlite.commands;
 
+import com.franciscodadone.staffchatlite.chat.ChatManager;
 import com.franciscodadone.staffchatlite.commands.subcommands.Help;
 import com.franciscodadone.staffchatlite.commands.subcommands.SubCommands;
+import com.franciscodadone.staffchatlite.util.Utils;
 import com.sun.istack.internal.NotNull;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -16,28 +19,7 @@ public class CommandManager implements TabExecutor {
     ArrayList<SubCommands> subCommands = new ArrayList<>();
 
     public CommandManager() {
-
-//        // Users
         subCommands.add(new Help());
-//        subCommands.add(new Authors());
-//        subCommands.add(new Version());
-//        subCommands.add(new Buy());
-//        subCommands.add(new com.franciscodadone.anchorsell.commands.subcommands.List());
-//        subCommands.add(new Top());
-//        subCommands.add(new Upgrades());
-//
-//        // Admin
-//        subCommands.add(new Reload());
-//        subCommands.add(new ChangePrice());
-//        subCommands.add(new ChangeSafeZone());
-//        subCommands.add(new ChangeTotalAnchorsUserCanHave());
-//        subCommands.add(new ChangeUpgradeMultiplier());
-//        subCommands.add(new GetUserFileName());
-//        subCommands.add(new Give());
-//        subCommands.add(new Particles());
-//        subCommands.add(new Revalidate());
-//        subCommands.add(new CreateHologramTop());
-
     }
 
     @Override
@@ -50,8 +32,14 @@ public class CommandManager implements TabExecutor {
                     found.set(true);
                 }
             });
-//            if (!found.get())
-//                Utils.sendConfigMessage("unknown-command", sender);
+            // If no subcommand fount, send staff chat.
+            if (!found.get()) {
+                String message = "";
+                for(String arg : args) {
+                    message += arg + " ";
+                }
+                ChatManager.sendStaffChatMessage(sender, message);
+            }
         } else {
             new Help().perform(sender, args);
         }

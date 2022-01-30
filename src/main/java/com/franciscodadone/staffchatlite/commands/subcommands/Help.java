@@ -1,5 +1,6 @@
 package com.franciscodadone.staffchatlite.commands.subcommands;
 
+import com.franciscodadone.staffchatlite.permissions.PermissionTable;
 import com.franciscodadone.staffchatlite.util.Utils;
 import org.bukkit.command.CommandSender;
 
@@ -29,14 +30,12 @@ public class Help extends SubCommands {
 
     @Override
     public String getPermission() {
-        return "";
+        return PermissionTable.help;
     }
 
     @Override
     public void perform(CommandSender sender, String[] args) {
-        if(sender.hasPermission("anchorsell.admin.help")) {
-            Utils.sendConfigMultilineMessage("help-message-admin", sender);
-        } else {
+        if(sender.hasPermission(getPermission())) {
             Utils.sendConfigMultilineMessage("help-message", sender);
         }
     }
