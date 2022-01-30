@@ -79,5 +79,5 @@ public class LangConfig {
     private final StaffChatLite plugin;
     private FileConfiguration dataConfig = null;
     private File configFile = null;
-    private String langFileStr;
+    private final String langFileStr;
 }

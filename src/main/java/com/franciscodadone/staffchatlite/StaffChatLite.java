@@ -6,7 +6,6 @@ import com.franciscodadone.staffchatlite.storage.Global;
 import com.franciscodadone.staffchatlite.thirdparty.Metrics;
 import com.franciscodadone.staffchatlite.util.Logger;
 import com.franciscodadone.staffchatlite.util.UpdateChecker;
-import com.franciscodadone.staffchatlite.util.Utils;
 import com.tchristofferson.configupdater.ConfigUpdater;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -18,6 +17,7 @@ import java.util.jar.JarFile;
 
 public final class StaffChatLite extends JavaPlugin {
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
     public void onEnable() {
 
@@ -88,6 +88,7 @@ public final class StaffChatLite extends JavaPlugin {
 
 
         // Setup global variables such as lang config.
+        //noinspection InstantiationOfUtilityClass
         new Global();
 
 
@@ -103,7 +104,7 @@ public final class StaffChatLite extends JavaPlugin {
         });
 
         // Metrics
-        Metrics metrics = new Metrics(this, 14124);
+        new Metrics(this, 14124);
 
     }
 

@@ -8,6 +8,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import java.util.Objects;
+
 public class ChatEvent implements Listener {
 
     @EventHandler
@@ -21,9 +23,9 @@ public class ChatEvent implements Listener {
             }
 
             // Send message when #
-            if(e.getMessage().startsWith(Global.plugin.getConfig().getString("sc-send-alias"))) {
+            if(e.getMessage().startsWith(Objects.requireNonNull(Global.plugin.getConfig().getString("sc-send-alias")))) {
                 e.setCancelled(true);
-                String message = e.getMessage().replaceFirst(Global.plugin.getConfig().getString("sc-send-alias"), "");
+                String message = e.getMessage().replaceFirst(Objects.requireNonNull(Global.plugin.getConfig().getString("sc-send-alias")), "");
                 ChatManager.sendStaffChatMessage(player, message);
             }
 

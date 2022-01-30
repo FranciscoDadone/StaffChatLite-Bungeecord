@@ -3,13 +3,10 @@ package com.franciscodadone.staffchatlite.commands;
 import com.franciscodadone.staffchatlite.chat.ChatManager;
 import com.franciscodadone.staffchatlite.commands.subcommands.*;
 import com.franciscodadone.staffchatlite.permissions.PermissionTable;
-import com.franciscodadone.staffchatlite.storage.Global;
-import com.franciscodadone.staffchatlite.util.Utils;
 import com.sun.istack.internal.NotNull;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
-import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -31,11 +28,11 @@ public class CommandManager implements TabExecutor {
         if(command.getName().equals("sc")) {
             if(sender.hasPermission(PermissionTable.chat)) {
                 if(args.length > 0) {
-                    String message = "";
+                    StringBuilder message = new StringBuilder();
                     for(String arg : args) {
-                        message += arg + " ";
+                        message.append(arg).append(" ");
                     }
-                    ChatManager.sendStaffChatMessage(sender, message);
+                    ChatManager.sendStaffChatMessage(sender, message.toString());
                     return true;
                 }
             }
@@ -51,7 +48,7 @@ public class CommandManager implements TabExecutor {
             return true;
         }
 
-        AtomicBoolean found = new AtomicBoolean(false);
+        @SuppressWarnings("WriteOnlyObject") AtomicBoolean found = new AtomicBoolean(false);
         if (args.length >= 1) {
             subCommands.forEach((cmd) -> {
                 if (args[0].equalsIgnoreCase(cmd.getName())) {

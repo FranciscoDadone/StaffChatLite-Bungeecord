@@ -16,6 +16,6 @@ public class Logger {
         Bukkit.getConsoleSender().sendMessage(prefix + Utils.Color("&e" + str));
     }
 
-    private static String prefix = Utils.Color("&7[&bStaffChatLite&7]&f ");
+    private static final String prefix = Utils.Color("&7[&bStaffChatLite&7]&f ");
 
 }
