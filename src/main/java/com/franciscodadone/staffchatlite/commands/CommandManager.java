@@ -1,10 +1,7 @@
 package com.franciscodadone.staffchatlite.commands;
 
 import com.franciscodadone.staffchatlite.chat.ChatManager;
-import com.franciscodadone.staffchatlite.commands.subcommands.Help;
-import com.franciscodadone.staffchatlite.commands.subcommands.Reload;
-import com.franciscodadone.staffchatlite.commands.subcommands.SubCommands;
-import com.franciscodadone.staffchatlite.commands.subcommands.Toggle;
+import com.franciscodadone.staffchatlite.commands.subcommands.*;
 import com.sun.istack.internal.NotNull;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -22,6 +19,7 @@ public class CommandManager implements TabExecutor {
         subCommands.add(new Help());
         subCommands.add(new Toggle());
         subCommands.add(new Reload());
+        subCommands.add(new Author());
     }
 
     @Override

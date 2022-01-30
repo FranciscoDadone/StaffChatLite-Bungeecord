@@ -8,19 +8,20 @@
 
 prefix: "&9[&bSC&9] "
 
-reload-message: '&aConfig reloaded.'
+reload-message: "&aConfig reloaded."
 
 help-message:
-  - '&7&m----------&r &9&lStaffChat &7&m----------'
-  - '&b/sc help &fShows this help.'
-  - '&b/sc <message> &fSends message to staff chat.'
-  - '&b/sc toggle &fToggles staff chat.'
-  - ''
-  - '&b/sc author'
-  - '&7&m-------------------------------'
+  - "&7&m----------&r &9&lStaffChat &7&m----------"
+  - "&b/sc help &fShows this help."
+  - "&b/sc <message> &fSends message to staff chat."
+  - "&b/sc toggle &fToggles staff chat."
+  - "&b/sc reload &fReload config."
+  - ""
+  - "&b/sc author"
+  - "&7&m-------------------------------"
 
-unknown-command: '&bUnknown command.'
-no-permissions: '&cYou don''t have permission. (%permissionNode%)'
+unknown-command: "&bUnknown command."
+no-permissions: "&cYou don''t have permission. (%permissionNode%)"
 
 toggle-on: "&bToggled &a&lON"
 toggle-off: "&bToggled &c&lOFF"
