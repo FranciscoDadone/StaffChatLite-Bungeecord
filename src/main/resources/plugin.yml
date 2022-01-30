@@ -1,0 +1,24 @@
+name: StaffChatLite
+version: '${project.version}'
+main: com.franciscodadone.staffchatlite.StaffChatLite
+api-version: 1.18
+prefix: StaffChatLite
+load: STARTUP
+authors: [ FranciscoDadone ]
+description: Simple and easy to use staff chat plugin.
+
+commands:
+  staffchat:
+    permission: "staffchatlite.help"
+    usage: "/staffchat"
+  sc:
+    permission: "staffchatlite.help"
+    usage: "/sc"
+
+permissions:
+  staffchatlite.help:
+    default: op
+    description: "View help for this plugin."
+  staffchatlite.chat:
+    default: op
+    description: "Send and receive staff chat messages"
