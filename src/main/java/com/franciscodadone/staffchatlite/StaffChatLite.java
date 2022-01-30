@@ -103,8 +103,9 @@ public final class StaffChatLite extends JavaPlugin {
             }
         });
 
-        // Metrics
-        new Metrics(this, 14124);
+        // Metrics and lang file chart
+        Metrics metrics = new Metrics(this, 14124);
+        metrics.addCustomChart(new Metrics.SimplePie("lang_file", () -> Global.plugin.getConfig().getString("lang-file")));
 
     }
 
