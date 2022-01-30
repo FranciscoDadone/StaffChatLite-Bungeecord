@@ -1,3 +1,6 @@
 lang-file: "English.yml"
 
 chat-style: "%prefix%&c%player%&f: %message%"
+
+# This allows the player to send a staff chat message using "#" at the start.
+sc-send-alias: "# "
