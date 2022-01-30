@@ -2,11 +2,8 @@ package com.franciscodadone.staffchatlite;
 
 import com.franciscodadone.staffchatlite.commands.CommandManager;
 import com.franciscodadone.staffchatlite.storage.Global;
-import com.franciscodadone.staffchatlite.storage.LangConfig;
 import com.tchristofferson.configupdater.ConfigUpdater;
-import jdk.nashorn.internal.runtime.regexp.joni.Config;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.checkerframework.checker.units.qual.A;
 
 import java.io.File;
 import java.io.IOException;
