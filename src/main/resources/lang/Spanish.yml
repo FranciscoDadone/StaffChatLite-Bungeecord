@@ -23,5 +23,5 @@ help-message:
 
 no-permissions: "&cNo tienes permiso. (%permissionNode%)"
 
-toggle-on: "&a&lActivo"
-toggle-off: "&c&lDesactivado"
+toggle-on: "&bStaffChat &a&lActivo"
+toggle-off: "&bStaffChat &c&lDesactivado"

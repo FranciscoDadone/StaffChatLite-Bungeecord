@@ -39,6 +39,7 @@ public class Reload extends SubCommands {
         if(sender.hasPermission(getPermission())) {
             Global.plugin.reloadConfig();
             Global.langConfig.reloadConfig();
+            new Global();
             sender.sendMessage(Utils.Color(Global.langConfig.getConfig().getString("prefix") + Global.langConfig.getConfig().getString("reload-message")));
         } else {
             Utils.noPermission(getPermission(), sender);
