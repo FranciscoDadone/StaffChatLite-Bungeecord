@@ -3,6 +3,9 @@ package com.franciscodadone.staffchatlite;
 import com.franciscodadone.staffchatlite.commands.CommandManager;
 import com.franciscodadone.staffchatlite.events.ChatEvent;
 import com.franciscodadone.staffchatlite.storage.Global;
+import com.franciscodadone.staffchatlite.thirdparty.Metrics;
+import com.franciscodadone.staffchatlite.util.Logger;
+import com.franciscodadone.staffchatlite.util.UpdateChecker;
 import com.tchristofferson.configupdater.ConfigUpdater;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -82,6 +85,21 @@ public final class StaffChatLite extends JavaPlugin {
 
         // Setup global variables such as lang config.
         new Global();
+
+
+        // // Update checker // //
+        new UpdateChecker(99628).getVersion(version -> {
+            if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
+                Logger.info("Up to date!");
+            } else {
+                Logger.warning("Plugin Outdated!");
+                Logger.warning("&eDownload the new version from: &9https://www.spigotmc.org/resources/staffchatlite.99628/");
+                UpdateChecker.updateString = version;
+            }
+        });
+
+        // Metrics
+        Metrics metrics = new Metrics(this, 14124);
 
     }
 
