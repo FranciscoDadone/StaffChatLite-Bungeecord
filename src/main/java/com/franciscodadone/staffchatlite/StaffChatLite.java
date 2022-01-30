@@ -1,6 +1,7 @@
 package com.franciscodadone.staffchatlite;
 
 import com.franciscodadone.staffchatlite.commands.CommandManager;
+import com.franciscodadone.staffchatlite.events.ChatEvent;
 import com.franciscodadone.staffchatlite.storage.Global;
 import com.tchristofferson.configupdater.ConfigUpdater;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -18,6 +19,10 @@ public final class StaffChatLite extends JavaPlugin {
 
         // // Global variables // //
         Global.plugin = this;
+
+        // Events
+        getServer().getPluginManager().registerEvents(new ChatEvent(), this);               // enabling the listener
+
 
         // // Global Config // //
         this.saveDefaultConfig();

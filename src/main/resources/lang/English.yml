@@ -6,7 +6,7 @@
 # Discord: Ddd#7413
 ##
 
-prefix: "&9[&bSC&9]"
+prefix: "&9[&bSC&9] "
 
 reload-message: '&aConfig reloaded.'
 
@@ -21,3 +21,6 @@ help-message:
 
 unknown-command: '&bUnknown command.'
 no-permissions: '&cYou don''t have permission. (%permissionNode%)'
+
+toggle-on: "&bToggled &a&lON"
+toggle-off: "&bToggled &c&lOFF"

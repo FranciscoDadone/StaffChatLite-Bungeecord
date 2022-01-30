@@ -10,15 +10,23 @@ import org.bukkit.entity.Player;
 public class ChatManager {
 
     public static void sendStaffChatMessage(CommandSender sender, String message) {
-        Player playerSender = (Player) sender;
         for(Player p : Bukkit.getServer().getOnlinePlayers()) {
             if(p.hasPermission(PermissionTable.chat)) {
                 String toSend = Global.plugin.getConfig().getString("chat-style");
-                toSend = toSend.replace("%player%", playerSender.getPlayerListName());
+                if(sender instanceof Player) toSend = toSend.replace("%player%", ((Player)sender).getPlayerListName());
+                else toSend = toSend.replace("%player%", "Console");
                 toSend = toSend.replace("%prefix%", Global.langConfig.getString("prefix"));
                 toSend = toSend.replace("%message%", message);
                 p.sendMessage(Utils.Color(toSend));
             }
+        }
+    }
+
+    public static void toggleStaffChat(Player player) {
+        if(!Global.playersToggledStaffChat.contains(player)) {
+            Global.playersToggledStaffChat.add(player);
+        } else {
+            Global.playersToggledStaffChat.remove(player);
         }
     }
 
