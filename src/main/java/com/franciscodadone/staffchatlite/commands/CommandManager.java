@@ -42,22 +42,12 @@ public class CommandManager implements TabExecutor {
         }
 
         if(command.getName().equals("schelp") || command.getName().equals("staffchatlite")) {
-            if(sender.hasPermission(PermissionTable.help)) Utils.sendConfigMultilineMessage("help-message", sender);
-            else Utils.noPermission(PermissionTable.help, sender);
+            new Help().perform(sender, args);
             return true;
         }
 
         if(command.getName().equals("sct")) {
-            if(sender.hasPermission(PermissionTable.toggle)) {
-                ChatManager.toggleStaffChat((Player) sender);
-                if(Global.playersToggledStaffChat.contains((Player)sender)) {
-                    sender.sendMessage(Utils.Color(Global.langConfig.getConfig().getString("prefix") + Global.langConfig.getConfig().getString("toggle-on")));
-                } else {
-                    sender.sendMessage(Utils.Color(Global.langConfig.getConfig().getString("prefix") + Global.langConfig.getConfig().getString("toggle-off")));
-                }
-            } else {
-                Utils.noPermission(PermissionTable.toggle, sender);
-            }
+            new Toggle().perform(sender, args);
             return true;
         }
 
