@@ -1,16 +1,14 @@
 package com.franciscodadone.staffchatlite.commands.subcommands;
 
-import com.franciscodadone.staffchatlite.chat.ChatManager;
 import com.franciscodadone.staffchatlite.permissions.PermissionTable;
 import com.franciscodadone.staffchatlite.storage.Global;
 import com.franciscodadone.staffchatlite.util.Utils;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Toggle extends SubCommands {
+public class Reload extends SubCommands {
     @Override
     public String getDescription() {
         return null;
@@ -18,12 +16,12 @@ public class Toggle extends SubCommands {
 
     @Override
     public String getName() {
-        return "toggle";
+        return "reload";
     }
 
     @Override
     public String syntax() {
-        return "/sc toggle";
+        return "/sc reload";
     }
 
     @Override
@@ -33,16 +31,17 @@ public class Toggle extends SubCommands {
 
     @Override
     public String getPermission() {
-        return PermissionTable.toggle;
+        return PermissionTable.reload;
     }
 
     @Override
     public void perform(CommandSender sender, String[] args) {
-        ChatManager.toggleStaffChat((Player) sender);
-        if(Global.playersToggledStaffChat.contains((Player)sender)) {
-            sender.sendMessage(Utils.Color(Global.langConfig.getConfig().getString("prefix") + Global.langConfig.getConfig().getString("toggle-on")));
-        } else {
-            sender.sendMessage(Utils.Color(Global.langConfig.getConfig().getString("prefix") + Global.langConfig.getConfig().getString("toggle-off")));
+
+        if(sender.hasPermission(getPermission())) {
+            Global.plugin.reloadConfig();
+            Global.langConfig.reloadConfig();
+            sender.sendMessage(Utils.Color(Global.langConfig.getConfig().getString("prefix") + Global.langConfig.getConfig().getString("reload-message")));
         }
+
     }
 }

@@ -20,7 +20,7 @@ public class LangConfig {
     /**
      * Reloads a user config.
      */
-    protected void reloadConfig() {
+    public void reloadConfig() {
         if(this.configFile == null) {
             this.configFile = new File(this.plugin.getDataFolder() + File.separator + "lang", langFileStr);
         }
@@ -37,7 +37,7 @@ public class LangConfig {
      * Gets a user config.
      * @return FileConfiguration
      */
-    protected FileConfiguration getConfig() {
+    public FileConfiguration getConfig() {
         if(this.dataConfig == null) {
             reloadConfig();
         }

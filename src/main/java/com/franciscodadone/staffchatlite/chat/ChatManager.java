@@ -15,7 +15,7 @@ public class ChatManager {
                 String toSend = Global.plugin.getConfig().getString("chat-style");
                 if(sender instanceof Player) toSend = toSend.replace("%player%", ((Player)sender).getPlayerListName());
                 else toSend = toSend.replace("%player%", "Console");
-                toSend = toSend.replace("%prefix%", Global.langConfig.getString("prefix"));
+                toSend = toSend.replace("%prefix%", Global.langConfig.getConfig().getString("prefix"));
                 toSend = toSend.replace("%message%", message);
                 p.sendMessage(Utils.Color(toSend));
             }

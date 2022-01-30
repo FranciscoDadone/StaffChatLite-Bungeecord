@@ -2,6 +2,7 @@ package com.franciscodadone.staffchatlite.commands;
 
 import com.franciscodadone.staffchatlite.chat.ChatManager;
 import com.franciscodadone.staffchatlite.commands.subcommands.Help;
+import com.franciscodadone.staffchatlite.commands.subcommands.Reload;
 import com.franciscodadone.staffchatlite.commands.subcommands.SubCommands;
 import com.franciscodadone.staffchatlite.commands.subcommands.Toggle;
 import com.sun.istack.internal.NotNull;
@@ -20,6 +21,7 @@ public class CommandManager implements TabExecutor {
     public CommandManager() {
         subCommands.add(new Help());
         subCommands.add(new Toggle());
+        subCommands.add(new Reload());
     }
 
     @Override

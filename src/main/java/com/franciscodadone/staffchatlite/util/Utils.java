@@ -53,7 +53,7 @@ public class Utils {
      */
     public static void sendConfigMessage(String path, CommandSender sender) {
         try {
-            sender.sendMessage(Color(Objects.requireNonNull(Global.langConfig.getString(path))));
+            sender.sendMessage(Color(Objects.requireNonNull(Global.langConfig.getConfig().getString(path))));
         } catch (Exception e) {
             Logger.severe("Check for config updates: &ahttps://github.com/FranciscoDadone/AnchorSell/blob/main/src/main/resources/config.yml");
         }
@@ -66,7 +66,7 @@ public class Utils {
      */
     public static void sendConfigMultilineMessage(String path, CommandSender sender) {
         try {
-            for(String line: Global.langConfig.getStringList(path)) {
+            for(String line: Global.langConfig.getConfig().getStringList(path)) {
                 sender.sendMessage(Utils.Color(line));
             }
         } catch (Exception e) {
