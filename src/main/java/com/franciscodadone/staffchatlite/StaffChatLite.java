@@ -1,9 +1,10 @@
 package com.franciscodadone.staffchatlite;
 
-import com.franciscodadone.staffchatlite.bungeecord.senders.BungeeGetServerName;
+import com.franciscodadone.staffchatlite.bungeecord.BungeeCheck;
 import com.franciscodadone.staffchatlite.commands.CommandManager;
 import com.franciscodadone.staffchatlite.events.ChatEvent;
 import com.franciscodadone.staffchatlite.bungeecord.listeners.BungeeMessageListener;
+import com.franciscodadone.staffchatlite.events.PlayerJoin;
 import com.franciscodadone.staffchatlite.storage.Global;
 import com.franciscodadone.staffchatlite.thirdparty.Metrics;
 import com.franciscodadone.staffchatlite.util.Logger;
@@ -28,9 +29,12 @@ public final class StaffChatLite extends JavaPlugin {
 
         // Events
         getServer().getPluginManager().registerEvents(new ChatEvent(), this);               // enabling the listener
+        getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
 
+        // BungeeCord integration
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", new BungeeMessageListener());
+        BungeeCheck.check();
 
         // // Global Config // //
         this.saveDefaultConfig();

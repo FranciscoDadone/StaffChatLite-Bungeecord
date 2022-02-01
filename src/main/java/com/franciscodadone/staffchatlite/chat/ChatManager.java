@@ -1,9 +1,10 @@
 package com.franciscodadone.staffchatlite.chat;
 
-import com.franciscodadone.staffchatlite.bungeecord.senders.BungeeGetServerName;
+import com.franciscodadone.staffchatlite.bungeecord.BungeeCheck;
 import com.franciscodadone.staffchatlite.bungeecord.senders.BungeeSendMessage;
 import com.franciscodadone.staffchatlite.permissions.PermissionTable;
 import com.franciscodadone.staffchatlite.storage.Global;
+import com.franciscodadone.staffchatlite.util.Logger;
 import com.franciscodadone.staffchatlite.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -12,31 +13,27 @@ import org.bukkit.entity.Player;
 public class ChatManager {
 
     public static void sendStaffChatMessage(CommandSender sender, String message) {
-        String playerName = (sender instanceof Player) ? ((Player)sender).getPlayerListName() : "Console";
+        if(Bukkit.getServer().getOnlinePlayers().size() > 0) {
+            String playerName = (sender instanceof Player) ? ((Player)sender).getPlayerListName() : "Console";
 
-        if(Global.serverName == null) {
             if(Global.bungeeEnabled) {
-                new Thread(() -> {
-                    BungeeGetServerName.getName();
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) { e.printStackTrace(); }
-
-                    if(Global.serverName == null) Global.bungeeEnabled = false;
-
-                    if(Global.bungeeEnabled) {
+                if(Global.serverName.equals("Unknown")) {
+                    BungeeCheck.check();
+                    new Thread(() -> {
+                        try {
+                            Thread.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         BungeeSendMessage.send(playerName, message, Global.serverName);
                         sendStaffChatMessageFromOtherServer(playerName, message, Global.serverName);
-                    } else {
-                        sendStaffChatMessage(playerName, message);
-                    }
-                }).start();
+                    }).start();
+                }
             } else {
                 sendStaffChatMessage(playerName, message);
             }
         } else {
-            BungeeSendMessage.send(playerName, message, Global.serverName);
-            sendStaffChatMessageFromOtherServer(playerName, message, Global.serverName);
+            Logger.warning("Could not send staff chat message because there is no one online.");
         }
     }
 
@@ -45,7 +42,7 @@ public class ChatManager {
         toSend = toSend.replace("%player%", playerName);
         toSend = toSend.replace("%prefix%", Global.langConfig.getConfig().getString("prefix"));
         toSend = toSend.replace("%message%", message);
-        toSend = toSend.replace("%server%", serverName);
+        toSend = toSend.replace("%server%", "(" + serverName + ")");
         for(Player p : Bukkit.getServer().getOnlinePlayers()) {
             if(p.hasPermission(PermissionTable.chat)) {
                 p.sendMessage(Utils.Color(toSend));

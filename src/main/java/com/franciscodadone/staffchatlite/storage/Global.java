@@ -11,6 +11,7 @@ public class Global {
         Global.langConfig =  new LangConfig();
         playersToggledStaffChat = new ArrayList<>();
         bungeeEnabled = true;
+        serverName = "Unknown";
     }
 
     public static StaffChatLite plugin;
