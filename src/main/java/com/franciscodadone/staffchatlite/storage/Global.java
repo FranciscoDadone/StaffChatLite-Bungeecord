@@ -10,10 +10,13 @@ public class Global {
     public Global() {
         Global.langConfig =  new LangConfig();
         playersToggledStaffChat = new ArrayList<>();
+        bungeeEnabled = true;
     }
 
     public static StaffChatLite plugin;
     public static LangConfig langConfig;
     public static ArrayList<Player> playersToggledStaffChat;
+    public static String serverName;
+    public static boolean bungeeEnabled;
 
 }
