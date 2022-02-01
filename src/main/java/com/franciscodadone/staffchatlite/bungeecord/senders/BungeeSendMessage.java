@@ -12,6 +12,13 @@ import java.io.IOException;
 
 public class BungeeSendMessage {
 
+    /**
+     * Sends a byte stream of the message, player name and current server name
+     * to all servers in the network.
+     * @param playerName
+     * @param message
+     * @param serverName
+     */
     public static void send(String playerName, String message, String serverName) {
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeUTF("Forward");

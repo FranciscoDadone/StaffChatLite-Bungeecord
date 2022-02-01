@@ -12,6 +12,11 @@ import org.bukkit.entity.Player;
 
 public class ChatManager {
 
+    /**
+     * Sends a Staff Chat message, if it detects bungee enabled it adds the server name too.
+     * @param sender
+     * @param message
+     */
     public static void sendStaffChatMessage(CommandSender sender, String message) {
         if(Bukkit.getServer().getOnlinePlayers().size() > 0) {
             String playerName = (sender instanceof Player) ? ((Player)sender).getPlayerListName() : "Console";
@@ -28,6 +33,9 @@ public class ChatManager {
                         BungeeSendMessage.send(playerName, message, Global.serverName);
                         sendStaffChatMessageFromOtherServer(playerName, message, Global.serverName);
                     }).start();
+                } else {
+                    BungeeSendMessage.send(playerName, message, Global.serverName);
+                    sendStaffChatMessageFromOtherServer(playerName, message, Global.serverName);
                 }
             } else {
                 sendStaffChatMessage(playerName, message);
@@ -37,6 +45,12 @@ public class ChatManager {
         }
     }
 
+    /**
+     * Sends staff chat message with server name in front.
+     * @param playerName
+     * @param message
+     * @param serverName
+     */
     public static void sendStaffChatMessageFromOtherServer(String playerName, String message, String serverName) {
         String toSend = Global.plugin.getConfig().getString("chat-style");
         toSend = toSend.replace("%player%", playerName);
@@ -51,6 +65,11 @@ public class ChatManager {
         Bukkit.getConsoleSender().sendMessage(Utils.Color(toSend));
     }
 
+    /**
+     * Sends staff chat message without server name.
+     * @param playerName
+     * @param message
+     */
     public static void sendStaffChatMessage(String playerName, String message) {
         String toSend = Global.plugin.getConfig().getString("chat-style");
         toSend = toSend.replace("%player%", playerName);
@@ -65,6 +84,10 @@ public class ChatManager {
         Bukkit.getConsoleSender().sendMessage(Utils.Color(toSend));
     }
 
+    /**
+     * Toggles staff chat. /sct
+     * @param player
+     */
     public static void toggleStaffChat(Player player) {
         if(!Global.playersToggledStaffChat.contains(player)) {
             Global.playersToggledStaffChat.add(player);

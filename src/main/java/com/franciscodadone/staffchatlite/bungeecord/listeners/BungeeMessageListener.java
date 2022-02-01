@@ -13,6 +13,13 @@ import java.io.IOException;
 
 public class BungeeMessageListener implements PluginMessageListener {
 
+    /**
+     * Receives the byte stream from BungeeSendMessage and displays the information
+     * on the other server.
+     * @param channel
+     * @param player
+     * @param message
+     */
     @Override
     public void onPluginMessageReceived(String channel, Player player, byte[] message) {
         if (!channel.equals("BungeeCord")) { return; }

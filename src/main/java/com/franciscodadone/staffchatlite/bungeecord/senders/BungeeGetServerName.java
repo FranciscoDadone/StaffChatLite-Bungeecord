@@ -9,6 +9,9 @@ import java.io.ByteArrayOutputStream;
 
 public class BungeeGetServerName {
 
+    /**
+     * Sends a GetServer to get the current server name (in bungee)
+     */
     public static void getName() {
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeUTF("GetServer");
