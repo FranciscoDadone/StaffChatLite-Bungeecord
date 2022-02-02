@@ -5,6 +5,7 @@ api-version: 1.14
 prefix: StaffChatLite
 load: STARTUP
 authors: [ FranciscoDadone ]
+softdepend: [ DiscordSRV ]
 description: Simple and easy to use staff chat plugin.
 
 commands:

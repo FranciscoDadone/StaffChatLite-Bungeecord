@@ -1,12 +1,12 @@
 package com.franciscodadone.staffchatlite;
 
-import com.franciscodadone.staffchatlite.bungeecord.BungeeCheck;
+import com.franciscodadone.staffchatlite.thirdparty.bungeecord.BungeeCheck;
 import com.franciscodadone.staffchatlite.commands.CommandManager;
 import com.franciscodadone.staffchatlite.events.ChatEvent;
-import com.franciscodadone.staffchatlite.bungeecord.listeners.BungeeMessageListener;
+import com.franciscodadone.staffchatlite.thirdparty.bungeecord.listeners.BungeeMessageListener;
 import com.franciscodadone.staffchatlite.events.PlayerJoin;
 import com.franciscodadone.staffchatlite.storage.Global;
-import com.franciscodadone.staffchatlite.thirdparty.Metrics;
+import com.franciscodadone.staffchatlite.thirdparty.bstats.Metrics;
 import com.franciscodadone.staffchatlite.util.Logger;
 import com.franciscodadone.staffchatlite.util.UpdateChecker;
 import com.tchristofferson.configupdater.ConfigUpdater;
@@ -114,6 +114,8 @@ public final class StaffChatLite extends JavaPlugin {
         // Metrics and lang file chart
         Metrics metrics = new Metrics(this, 14124);
         metrics.addCustomChart(new Metrics.SimplePie("lang_file", () -> Global.plugin.getConfig().getString("lang-file")));
+
+
 
     }
 

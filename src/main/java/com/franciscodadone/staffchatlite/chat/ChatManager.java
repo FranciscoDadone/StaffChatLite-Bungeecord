@@ -1,7 +1,7 @@
 package com.franciscodadone.staffchatlite.chat;
 
-import com.franciscodadone.staffchatlite.bungeecord.BungeeCheck;
-import com.franciscodadone.staffchatlite.bungeecord.senders.BungeeSendMessage;
+import com.franciscodadone.staffchatlite.thirdparty.bungeecord.BungeeCheck;
+import com.franciscodadone.staffchatlite.thirdparty.bungeecord.senders.BungeeSendMessage;
 import com.franciscodadone.staffchatlite.permissions.PermissionTable;
 import com.franciscodadone.staffchatlite.storage.Global;
 import com.franciscodadone.staffchatlite.util.Logger;

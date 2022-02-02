@@ -1,4 +1,4 @@
-package com.franciscodadone.staffchatlite.bungeecord.senders;
+package com.franciscodadone.staffchatlite.thirdparty.bungeecord.senders;
 
 import com.franciscodadone.staffchatlite.storage.Global;
 import com.google.common.io.ByteArrayDataOutput;

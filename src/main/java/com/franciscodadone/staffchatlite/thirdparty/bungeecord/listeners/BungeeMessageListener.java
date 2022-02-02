@@ -1,4 +1,4 @@
-package com.franciscodadone.staffchatlite.bungeecord.listeners;
+package com.franciscodadone.staffchatlite.thirdparty.bungeecord.listeners;
 
 import com.franciscodadone.staffchatlite.chat.ChatManager;
 import com.franciscodadone.staffchatlite.storage.Global;

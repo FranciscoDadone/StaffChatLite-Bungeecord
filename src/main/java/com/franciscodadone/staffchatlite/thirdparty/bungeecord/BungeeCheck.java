@@ -1,6 +1,6 @@
-package com.franciscodadone.staffchatlite.bungeecord;
+package com.franciscodadone.staffchatlite.thirdparty.bungeecord;
 
-import com.franciscodadone.staffchatlite.bungeecord.senders.BungeeGetServerName;
+import com.franciscodadone.staffchatlite.thirdparty.bungeecord.senders.BungeeGetServerName;
 import com.franciscodadone.staffchatlite.storage.Global;
 import com.franciscodadone.staffchatlite.util.Logger;
 

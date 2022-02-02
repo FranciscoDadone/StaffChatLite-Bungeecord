@@ -1,6 +1,6 @@
 package com.franciscodadone.staffchatlite.events;
 
-import com.franciscodadone.staffchatlite.bungeecord.BungeeCheck;
+import com.franciscodadone.staffchatlite.thirdparty.bungeecord.BungeeCheck;
 import com.franciscodadone.staffchatlite.storage.Global;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
