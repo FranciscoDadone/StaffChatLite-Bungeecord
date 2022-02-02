@@ -13,18 +13,16 @@ public class BungeeCheck {
     public static void check() {
         if(Global.plugin.getServer().getOnlinePlayers().size() > 0) {
             new Thread(() -> {
-                // Sleeps 3 seconds to wait the player join.
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException ignored) {}
                 BungeeGetServerName.getName();
                 // Sleeps 10 seconds to wait for the response.
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(5000);
                 } catch (InterruptedException ignored) {}
 
-                if(Global.serverName.equals("Unknown")) Global.bungeeEnabled = false;
-                else Logger.info("BungeeCord enabled!");
+                if(!Global.serverName.equals("Unknown")) {
+                    Global.bungeeEnabled = true;
+                    Logger.info("BungeeCord enabled!");
+                }
             }).start();
         }
     }

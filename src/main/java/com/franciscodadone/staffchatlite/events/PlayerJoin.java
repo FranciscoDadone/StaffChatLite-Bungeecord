@@ -9,7 +9,11 @@ import org.bukkit.event.player.PlayerJoinEvent;
 public class PlayerJoin implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent ignored) {
-        if(Global.serverName.equals("Unknown") && Global.bungeeEnabled) {
+        if(Global.serverName.equals("Unknown") && !Global.bungeeEnabled) {
+            // Sleeps 3 seconds to wait the player join.
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException ignored1) {}
             BungeeCheck.check();
         }
     }

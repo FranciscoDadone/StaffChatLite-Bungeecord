@@ -23,7 +23,7 @@ public class Toggle extends SubCommands {
 
     @Override
     public String syntax() {
-        return "/sc toggle";
+        return "/sct";
     }
 
     @Override
@@ -41,9 +41,9 @@ public class Toggle extends SubCommands {
         if(sender instanceof Player && sender.hasPermission(getPermission())) {
             ChatManager.toggleStaffChat((Player) sender);
             if(Global.playersToggledStaffChat.contains((Player)sender)) {
-                sender.sendMessage(Utils.Color(Global.langConfig.getConfig().getString("prefix") + Global.langConfig.getConfig().getString("toggle-on")));
+                sender.sendMessage(Utils.Color(Global.langConfig.getConfig().getString("prefix") + " " + Global.langConfig.getConfig().getString("toggle-on")));
             } else {
-                sender.sendMessage(Utils.Color(Global.langConfig.getConfig().getString("prefix") + Global.langConfig.getConfig().getString("toggle-off")));
+                sender.sendMessage(Utils.Color(Global.langConfig.getConfig().getString("prefix") + " " + Global.langConfig.getConfig().getString("toggle-off")));
             }
         } else {
             Utils.noPermission(getPermission(), sender);

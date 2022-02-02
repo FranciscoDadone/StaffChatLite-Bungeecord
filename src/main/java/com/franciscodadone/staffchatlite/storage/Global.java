@@ -10,7 +10,7 @@ public class Global {
     public Global() {
         Global.langConfig =  new LangConfig();
         playersToggledStaffChat = new ArrayList<>();
-        bungeeEnabled = true;
+        bungeeEnabled = false;
         serverName = "Unknown";
         discordSRVEnabled = false;
     }

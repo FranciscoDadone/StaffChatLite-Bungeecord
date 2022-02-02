@@ -135,10 +135,8 @@ public final class StaffChatLite extends JavaPlugin {
             this.getServer().getMessenger().unregisterOutgoingPluginChannel(this);
             this.getServer().getMessenger().unregisterIncomingPluginChannel(this);
         }
-
         if(Global.discordSRVEnabled) DiscordSRV.api.unsubscribe(discordSRVListener);
     }
-
 
     private StaffDiscordSRVListener discordSRVListener = new StaffDiscordSRVListener();
 }

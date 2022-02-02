@@ -20,7 +20,6 @@ public class ChatManager {
     public static void sendStaffChatMessage(CommandSender sender, String message) {
         if(Bukkit.getServer().getOnlinePlayers().size() > 0) {
             String playerName = (sender instanceof Player) ? ((Player)sender).getPlayerListName() : "Console";
-
             if(Global.bungeeEnabled) {
                 if(Global.serverName.equals("Unknown")) {
                     BungeeCheck.check();
