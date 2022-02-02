@@ -4,3 +4,10 @@ chat-style: "%prefix% &7%server% &c%player%&f: %message%"
 
 # This allows the player to send a staff chat message using "#" at the start.
 sc-send-alias: "# "
+
+
+      ##########################
+      # DiscordSRV Integration #
+      ##########################
+# ChannelId where StaffChat messages will be shown
+discord-staff-channel-id: "0000000000000"

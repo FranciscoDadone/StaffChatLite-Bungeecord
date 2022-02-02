@@ -3,10 +3,14 @@ package com.franciscodadone.staffchatlite.commands;
 import com.franciscodadone.staffchatlite.chat.ChatManager;
 import com.franciscodadone.staffchatlite.commands.subcommands.*;
 import com.franciscodadone.staffchatlite.permissions.PermissionTable;
+import com.franciscodadone.staffchatlite.storage.Global;
+import com.franciscodadone.staffchatlite.thirdparty.discordsrv.StaffDiscordHandler;
 import com.sun.istack.internal.NotNull;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.Player;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -24,7 +28,6 @@ public class CommandManager implements TabExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-
         if(command.getName().equals("sc")) {
             if(sender.hasPermission(PermissionTable.chat)) {
                 if(args.length > 0) {
@@ -32,6 +35,7 @@ public class CommandManager implements TabExecutor {
                     for(String arg : args) {
                         message.append(arg).append(" ");
                     }
+                    if(Global.discordSRVEnabled) StaffDiscordHandler.sendStaffMessage(message.toString(), (sender instanceof Player) ? ((Player)sender).getPlayerListName() : "Console", Global.serverName);
                     ChatManager.sendStaffChatMessage(sender, message.toString());
                     return true;
                 }

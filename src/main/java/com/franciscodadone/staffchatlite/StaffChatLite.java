@@ -7,9 +7,12 @@ import com.franciscodadone.staffchatlite.thirdparty.bungeecord.listeners.BungeeM
 import com.franciscodadone.staffchatlite.events.PlayerJoin;
 import com.franciscodadone.staffchatlite.storage.Global;
 import com.franciscodadone.staffchatlite.thirdparty.bstats.Metrics;
+import com.franciscodadone.staffchatlite.thirdparty.discordsrv.StaffDiscordHandler;
+import com.franciscodadone.staffchatlite.thirdparty.discordsrv.StaffDiscordSRVListener;
 import com.franciscodadone.staffchatlite.util.Logger;
 import com.franciscodadone.staffchatlite.util.UpdateChecker;
 import com.tchristofferson.configupdater.ConfigUpdater;
+import github.scarsz.discordsrv.DiscordSRV;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -26,6 +29,8 @@ public final class StaffChatLite extends JavaPlugin {
 
         // // Global variables // //
         Global.plugin = this;
+        //noinspection InstantiationOfUtilityClass
+        new Global();
 
         // Events
         getServer().getPluginManager().registerEvents(new ChatEvent(), this);               // enabling the listener
@@ -87,18 +92,25 @@ public final class StaffChatLite extends JavaPlugin {
             }
         }
 
+        // // Hooks // //
+        // DiscordSRV
+        try {
+            if(getServer().getPluginManager().getPlugin("DiscordSRV") != null) {
+                StaffDiscordHandler.init();
+                DiscordSRV.api.subscribe(discordSRVListener);
+                Logger.info("DiscordSRV Hooked!");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         // // Loading commands // //
         Objects.requireNonNull(this.getCommand("sc")).setExecutor(new CommandManager());
         Objects.requireNonNull(this.getCommand("staffchat")).setExecutor(new CommandManager());
         Objects.requireNonNull(this.getCommand("schelp")).setExecutor(new CommandManager());
         Objects.requireNonNull(this.getCommand("scadmin")).setExecutor(new CommandManager());
         Objects.requireNonNull(this.getCommand("sct")).setExecutor(new CommandManager());
-
-
-        // Setup global variables such as lang config.
-        //noinspection InstantiationOfUtilityClass
-        new Global();
-
 
         // // Update checker // //
         new UpdateChecker(99628).getVersion(version -> {
@@ -115,13 +127,18 @@ public final class StaffChatLite extends JavaPlugin {
         Metrics metrics = new Metrics(this, 14124);
         metrics.addCustomChart(new Metrics.SimplePie("lang_file", () -> Global.plugin.getConfig().getString("lang-file")));
 
-
-
     }
 
     @Override
     public void onDisable() {
-        this.getServer().getMessenger().unregisterOutgoingPluginChannel(this);
-        this.getServer().getMessenger().unregisterIncomingPluginChannel(this);
+        if(Global.bungeeEnabled) {
+            this.getServer().getMessenger().unregisterOutgoingPluginChannel(this);
+            this.getServer().getMessenger().unregisterIncomingPluginChannel(this);
+        }
+
+        if(Global.discordSRVEnabled) DiscordSRV.api.unsubscribe(discordSRVListener);
     }
+
+
+    private StaffDiscordSRVListener discordSRVListener = new StaffDiscordSRVListener();
 }
