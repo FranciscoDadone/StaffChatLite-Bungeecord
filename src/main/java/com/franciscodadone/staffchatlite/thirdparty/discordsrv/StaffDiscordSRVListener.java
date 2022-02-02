@@ -1,5 +1,6 @@
 package com.franciscodadone.staffchatlite.thirdparty.discordsrv;
 
+import com.franciscodadone.staffchatlite.chat.ChatManager;
 import com.franciscodadone.staffchatlite.storage.Global;
 import github.scarsz.discordsrv.api.ListenerPriority;
 import github.scarsz.discordsrv.api.Subscribe;
@@ -11,7 +12,7 @@ public class StaffDiscordSRVListener {
     public void discordMessageReceived(DiscordGuildMessageReceivedEvent event) {
 
         if(event.getChannel().getId().equals(Global.plugin.getConfig().getString("discord-staff-channel-id"))) {
-            Global.plugin.getLogger().info("Received a chat message on Discord: " + event.getMessage());
+            ChatManager.sendStaffChatMessageFromDiscord(event.getMessage().getContentDisplay(), event.getAuthor().getName());
         }
     }
 }

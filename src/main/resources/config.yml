@@ -11,3 +11,4 @@ sc-send-alias: "# "
       ##########################
 # ChannelId where StaffChat messages will be shown
 discord-staff-channel-id: "0000000000000"
+chat-style-from-discord: "%prefix% &9[Discord] &c%username%&f: %message%"

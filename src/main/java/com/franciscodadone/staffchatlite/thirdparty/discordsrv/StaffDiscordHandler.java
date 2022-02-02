@@ -17,11 +17,10 @@ public class StaffDiscordHandler {
     public static void sendStaffMessage(String message, String player, @Nullable String server) {
 
         EmbedBuilder builder = new EmbedBuilder();
-        builder.setTitle(player + (server != null && !server.equals("Unknown") ? " (" + Global.serverName + ")" : ""));
-        builder.setDescription(message);
+        builder.setAuthor(player + (server != null && !server.equals("Unknown") ? " (" + Global.serverName + ")" : ""));
+        builder.setTitle(message);
         builder.setFooter("StaffChatLite - Spigot");
         builder.setColor(Color.RED);
-        builder.setThumbnail("https://i.imgur.com/Hu6PEG8.jpg");
         MessageEmbed msg = builder.build();
 
         DiscordUtil.getTextChannelById(Global.plugin.getConfig().getString("discord-staff-channel-id")).sendMessageEmbeds(msg).queue();

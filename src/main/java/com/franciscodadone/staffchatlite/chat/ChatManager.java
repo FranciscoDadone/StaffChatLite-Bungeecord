@@ -96,4 +96,17 @@ public class ChatManager {
         }
     }
 
+    public static void sendStaffChatMessageFromDiscord(String message, String username) {
+        String toSend = Global.plugin.getConfig().getString("chat-style-from-discord");
+        toSend = toSend.replace("%username%", username);
+        toSend = toSend.replace("%prefix%", Global.langConfig.getConfig().getString("prefix"));
+        toSend = toSend.replace("%message%", message);
+        for(Player p : Bukkit.getServer().getOnlinePlayers()) {
+            if(p.hasPermission(PermissionTable.chat)) {
+                p.sendMessage(Utils.Color(toSend));
+            }
+        }
+        Bukkit.getConsoleSender().sendMessage(Utils.Color(toSend));
+    }
+
 }
