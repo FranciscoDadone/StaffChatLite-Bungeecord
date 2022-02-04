@@ -1,4 +1,4 @@
-package com.franciscodadone.staffchatlite.api.customevents;
+package com.franciscodadone.staffchatlite.api.events;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;

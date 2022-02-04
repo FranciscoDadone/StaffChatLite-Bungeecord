@@ -14,7 +14,6 @@ import com.franciscodadone.staffchatlite.util.UpdateChecker;
 import com.tchristofferson.configupdater.ConfigUpdater;
 import github.scarsz.discordsrv.DiscordSRV;
 import org.bukkit.plugin.java.JavaPlugin;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.*;

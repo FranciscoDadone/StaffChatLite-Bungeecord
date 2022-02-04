@@ -29,3 +29,15 @@
 ### Issues? Bugs?
 Contact me via Discord: Ddd#7413
 Or open an Issue.
+
+## API (For developers)
+### Custom events (com.franciscodadone.staffchatlite.api.events)
+ - StaffMessageSendEvent (when a staff member sends staff chat)
+ - StaffToggleEvent      (when staff member toggles staff chat on or off)
+
+### ChatManager (com.franciscodadone.staffchatlite.api.chat)
+ - sendStaffChatMessage(CommandSender sender, String message)
+ - sendStaffChatMessage(String playerName, String message)
+ - sendStaffChatMessageFromOtherServer(String playerName, String message, String serverName)
+ - toggleStaffChat(Player player)
+ - sendStaffChatMessageFromDiscord(String message, String username)

@@ -1,7 +1,7 @@
 package com.franciscodadone.staffchatlite.api.chat;
 
-import com.franciscodadone.staffchatlite.api.customevents.StaffMessageSendEvent;
-import com.franciscodadone.staffchatlite.api.customevents.StaffToggleEvent;
+import com.franciscodadone.staffchatlite.api.events.StaffMessageSendEvent;
+import com.franciscodadone.staffchatlite.api.events.StaffToggleEvent;
 import com.franciscodadone.staffchatlite.thirdparty.bungeecord.BungeeCheck;
 import com.franciscodadone.staffchatlite.thirdparty.bungeecord.senders.BungeeSendMessage;
 import com.franciscodadone.staffchatlite.permissions.PermissionTable;
