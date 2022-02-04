@@ -1,14 +1,23 @@
+##################
+# General config #
+##################
+
+# Plugin language. View avaible languages in the lang folder.
+# You can create your own language and send me the file to my profile,
+# and I will add it to the plugin.
+# Send to: https://www.spigotmc.org/members/dadogamer13.120673/
 lang-file: "English.yml"
 
+# Chat style when staff chat message comes up.
 chat-style: "%prefix% &7%server%&c%player%&f: %message%"
 
 # This allows the player to send a staff chat message using "#" at the start.
 sc-send-alias: "# "
 
 
-      ##########################
-      # DiscordSRV Integration #
-      ##########################
+##########################
+# DiscordSRV Integration #
+##########################
 # ChannelId where StaffChat messages will be shown
 discord-staff-channel-id: "0000000000000"
-chat-style-from-discord: "%prefix% &9[Discord] &c%username%&f: %message%"
+chat-style-from-discord: "%prefix%&9[Discord] &c%username%&f: %message%"
