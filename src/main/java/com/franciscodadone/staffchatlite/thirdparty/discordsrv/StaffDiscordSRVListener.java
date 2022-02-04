@@ -1,6 +1,6 @@
 package com.franciscodadone.staffchatlite.thirdparty.discordsrv;
 
-import com.franciscodadone.staffchatlite.chat.ChatManager;
+import com.franciscodadone.staffchatlite.api.chat.ChatManager;
 import com.franciscodadone.staffchatlite.storage.Global;
 import github.scarsz.discordsrv.api.ListenerPriority;
 import github.scarsz.discordsrv.api.Subscribe;

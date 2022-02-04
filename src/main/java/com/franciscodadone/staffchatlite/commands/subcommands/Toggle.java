@@ -1,6 +1,6 @@
 package com.franciscodadone.staffchatlite.commands.subcommands;
 
-import com.franciscodadone.staffchatlite.chat.ChatManager;
+import com.franciscodadone.staffchatlite.api.chat.ChatManager;
 import com.franciscodadone.staffchatlite.permissions.PermissionTable;
 import com.franciscodadone.staffchatlite.storage.Global;
 import com.franciscodadone.staffchatlite.util.Utils;

@@ -1,6 +1,6 @@
 package com.franciscodadone.staffchatlite.thirdparty.bungeecord.listeners;
 
-import com.franciscodadone.staffchatlite.chat.ChatManager;
+import com.franciscodadone.staffchatlite.api.chat.ChatManager;
 import com.franciscodadone.staffchatlite.storage.Global;
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;

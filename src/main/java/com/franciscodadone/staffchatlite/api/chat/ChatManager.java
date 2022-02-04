@@ -1,5 +1,7 @@
-package com.franciscodadone.staffchatlite.chat;
+package com.franciscodadone.staffchatlite.api.chat;
 
+import com.franciscodadone.staffchatlite.api.customevents.StaffMessageSendEvent;
+import com.franciscodadone.staffchatlite.api.customevents.StaffToggleEvent;
 import com.franciscodadone.staffchatlite.thirdparty.bungeecord.BungeeCheck;
 import com.franciscodadone.staffchatlite.thirdparty.bungeecord.senders.BungeeSendMessage;
 import com.franciscodadone.staffchatlite.permissions.PermissionTable;
@@ -23,21 +25,13 @@ public class ChatManager {
             if(Global.bungeeEnabled) {
                 if(Global.serverName.equals("Unknown")) {
                     BungeeCheck.check();
-                    new Thread(() -> {
-                        try {
-                            Thread.sleep(500);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        BungeeSendMessage.send(playerName, message, Global.serverName);
-                        sendStaffChatMessageFromOtherServer(playerName, message, Global.serverName);
-                    }).start();
-                } else {
-                    BungeeSendMessage.send(playerName, message, Global.serverName);
-                    sendStaffChatMessageFromOtherServer(playerName, message, Global.serverName);
                 }
+                BungeeSendMessage.send(playerName, message, Global.serverName);
+                sendStaffChatMessageFromOtherServer(playerName, message, Global.serverName);
+                Bukkit.getScheduler().runTask(Global.plugin, () -> Bukkit.getServer().getPluginManager().callEvent(new StaffMessageSendEvent(message, sender, Global.serverName)));
             } else {
                 sendStaffChatMessage(playerName, message);
+                Bukkit.getScheduler().runTask(Global.plugin, () -> Bukkit.getServer().getPluginManager().callEvent(new StaffMessageSendEvent(message, sender, "")));
             }
         } else {
             Logger.warning("Could not send staff chat message because there is no one online.");
@@ -90,8 +84,10 @@ public class ChatManager {
     public static void toggleStaffChat(Player player) {
         if(!Global.playersToggledStaffChat.contains(player)) {
             Global.playersToggledStaffChat.add(player);
+            Bukkit.getScheduler().runTask(Global.plugin, () -> Bukkit.getServer().getPluginManager().callEvent(new StaffToggleEvent(player, true)));
         } else {
             Global.playersToggledStaffChat.remove(player);
+            Bukkit.getScheduler().runTask(Global.plugin, () -> Bukkit.getServer().getPluginManager().callEvent(new StaffToggleEvent(player, false)));
         }
     }
 
