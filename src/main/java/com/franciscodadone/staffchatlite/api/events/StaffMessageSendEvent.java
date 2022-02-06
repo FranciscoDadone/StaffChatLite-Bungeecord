@@ -1,9 +1,10 @@
 package com.franciscodadone.staffchatlite.api.events;
 
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.plugin.Cancellable;
 import net.md_5.bungee.api.plugin.Event;
 
-public class StaffMessageSendEvent extends Event {
+public class StaffMessageSendEvent extends Event implements Cancellable {
 
     public StaffMessageSendEvent(String message, CommandSender sender, String serverName) {
         this.message = message;
@@ -11,10 +12,12 @@ public class StaffMessageSendEvent extends Event {
         this.serverName = serverName;
     }
 
+    @Override
     public boolean isCancelled() {
         return cancelled;
     }
 
+    @Override
     public void setCancelled(boolean cancel) {
         cancelled = cancel;
     }

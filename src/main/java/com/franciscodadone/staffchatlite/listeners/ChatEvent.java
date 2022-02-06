@@ -1,4 +1,4 @@
-package com.franciscodadone.staffchatlite.events;
+package com.franciscodadone.staffchatlite.listeners;
 
 import com.franciscodadone.staffchatlite.api.chat.ChatManager;
 import com.franciscodadone.staffchatlite.permissions.PermissionTable;

@@ -1,13 +1,23 @@
 package com.franciscodadone.staffchatlite.api.events;
 
 import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.connection.Server;
 import net.md_5.bungee.api.plugin.Cancellable;
 import net.md_5.bungee.api.plugin.Event;
 
-public class StaffToggleEvent extends Event implements Cancellable {
-    public StaffToggleEvent(ProxiedPlayer sender, boolean isToggled) {
-        this.player = sender;
-        this.isToggled = isToggled;
+public class StaffLeaveEvent extends Event implements Cancellable {
+
+    public StaffLeaveEvent(ProxiedPlayer player, Server server) {
+        this.player = player;
+        this.server = server;
+    }
+
+    public ProxiedPlayer getPlayer() {
+        return player;
+    }
+
+    public Server getServer() {
+        return server;
     }
 
     @Override
@@ -20,15 +30,8 @@ public class StaffToggleEvent extends Event implements Cancellable {
         cancelled = cancel;
     }
 
-    public ProxiedPlayer getPlayer() {
-        return player;
-    }
-
-    public boolean isToggled() {
-        return isToggled;
-    }
-
     private ProxiedPlayer player;
-    private boolean isToggled;
+    private Server server;
     private boolean cancelled;
+
 }
