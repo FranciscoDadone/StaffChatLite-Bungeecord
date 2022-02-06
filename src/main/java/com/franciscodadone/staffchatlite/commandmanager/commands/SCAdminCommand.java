@@ -2,6 +2,7 @@ package com.franciscodadone.staffchatlite.commandmanager.commands;
 
 import com.franciscodadone.staffchatlite.commandmanager.subcommands.*;
 import com.franciscodadone.staffchatlite.permissions.PermissionTable;
+import com.franciscodadone.staffchatlite.util.Utils;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.TabExecutor;
@@ -24,7 +25,10 @@ public class SCAdminCommand extends Command implements TabExecutor {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if(!sender.hasPermission(PermissionTable.admin)) return;
+        if(!sender.hasPermission(PermissionTable.admin)) {
+            Utils.noPermission(PermissionTable.admin, sender);
+            return;
+        }
 
         @SuppressWarnings("WriteOnlyObject") AtomicBoolean found = new AtomicBoolean(false);
         if (args.length >= 1) {

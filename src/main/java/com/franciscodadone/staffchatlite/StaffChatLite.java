@@ -79,12 +79,12 @@ public final class StaffChatLite extends Plugin {
         ProxyServer.getInstance().getPluginManager().registerCommand(this, new SCMuteCommand());
 
         // // Update checker // //
-        new UpdateChecker(99628).getVersion(version -> {
+        new UpdateChecker(99828).getVersion(version -> {
             if (this.getDescription().getVersion().equalsIgnoreCase(version)) {
                 Logger.info("Up to date!");
             } else {
                 Logger.warning("Plugin Outdated!");
-                Logger.warning("&eDownload the new version from: &9https://www.spigotmc.org/resources/staffchatlite.99628/");
+                Logger.warning("&eDownload the new version from: &9https://www.spigotmc.org/resources/staffchatlite-bungeecord.99828/");
                 UpdateChecker.updateString = version;
             }
         });

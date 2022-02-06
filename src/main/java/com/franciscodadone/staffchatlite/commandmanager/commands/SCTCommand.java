@@ -15,7 +15,7 @@ public class SCTCommand extends Command {
     @Override
     public void execute(CommandSender sender, String[] args) {
         if(!sender.hasPermission(PermissionTable.toggle)) {
-            Utils.noPermission(getPermission(), sender);
+            Utils.noPermission(PermissionTable.toggle, sender);
             return;
         }
 

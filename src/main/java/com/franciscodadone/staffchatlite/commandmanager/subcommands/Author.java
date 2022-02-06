@@ -32,7 +32,7 @@ public class Author extends SubCommands {
     public void perform(CommandSender sender, String[] args) {
         sender.sendMessage(Utils.Color("&7&m----------&r &9&lStaffChat &7&m----------"));
         sender.sendMessage(Utils.Color("&bMade with &c❤️ &bby DadoGamer13"));
-        sender.sendMessage(Utils.Color("&bSpigot: &9..."));
+        sender.sendMessage(Utils.Color("&bSpigot: &9https://www.spigotmc.org/resources/staffchatlite-bungeecord.99828/"));
         sender.sendMessage(Utils.Color("&7&m-------------------------------"));
     }
 }

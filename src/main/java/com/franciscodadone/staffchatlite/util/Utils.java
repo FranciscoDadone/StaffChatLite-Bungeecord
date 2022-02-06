@@ -3,6 +3,8 @@ package com.franciscodadone.staffchatlite.util;
 import com.franciscodadone.staffchatlite.storage.Global;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.chat.TextComponent;
+
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -45,7 +47,7 @@ public class Utils {
      */
     public static void sendConfigMessageF(String str, String toBeReplaced, String toReplace, CommandSender sender) {
         try {
-            sender.sendMessage(Color(Objects.requireNonNull(Global.langConfig.getString(str)).replaceAll(toBeReplaced, toReplace)));
+            sender.sendMessage(new TextComponent(Color(Objects.requireNonNull(Global.langConfig.getString(str)).replaceAll(toBeReplaced, toReplace))));
         } catch (Exception e) {
             Logger.severe("Check for config updates: &ahttps://github.com/FranciscoDadone/StaffChatLite/tree/master/src/main/resources/lang");
         }
@@ -59,7 +61,7 @@ public class Utils {
     public static void sendConfigMultilineMessage(String path, CommandSender sender) {
         try {
             for(String line: Global.langConfig.getStringList(path)) {
-                sender.sendMessage(Utils.Color(line));
+                sender.sendMessage(new TextComponent(Utils.Color(line)));
             }
         } catch (Exception e) {
             Logger.severe("Check for config updates: &ahttps://github.com/FranciscoDadone/StaffChatLite/tree/master/src/main/resources/lang");
