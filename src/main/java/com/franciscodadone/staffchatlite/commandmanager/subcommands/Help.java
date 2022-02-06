@@ -1,18 +1,13 @@
-package com.franciscodadone.staffchatlite.commands.subcommands;
+package com.franciscodadone.staffchatlite.commandmanager.subcommands;
 
 import com.franciscodadone.staffchatlite.permissions.PermissionTable;
 import com.franciscodadone.staffchatlite.util.Utils;
-import org.bukkit.command.CommandSender;
+import net.md_5.bungee.api.CommandSender;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Help extends SubCommands {
-    @Override
-    public String getDescription() {
-        return "Shows the help";
-    }
-
     @Override
     public String getName() {
         return "help";
@@ -30,7 +25,7 @@ public class Help extends SubCommands {
 
     @Override
     public String getPermission() {
-        return PermissionTable.help;
+        return PermissionTable.admin;
     }
 
     @Override

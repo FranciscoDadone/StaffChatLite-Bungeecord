@@ -1,0 +1,6 @@
+name: StaffChatLite
+version: '${project.version}'
+main: com.franciscodadone.staffchatlite.StaffChatLite
+prefix: StaffChatLite
+authors: "DadoGamer13"
+description: Simple and easy to use staff chat plugin.

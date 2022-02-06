@@ -3,8 +3,7 @@ package com.franciscodadone.staffchatlite.permissions;
 public class PermissionTable {
 
     public static String chat = "staffchatlite.chat";
-    public static String help = "staffchatlite.help";
     public static String toggle = "staffchatlite.toggle";
-    public static String reload = "staffchatlite.reload";
+    public static String admin = "staffchatlite.admin";
 
 }

@@ -15,7 +15,6 @@ help-message:
   - "&b/scadmin help &fMuestra la ayuda."
   - "&b/sc <message> &fEnvia un mensaje por el staff chat."
   - "&b/sct &fAlterna entre staff chat y chat normal."
-  - "&b/scadmin toggle &fAlterna entre staff chat y chat normal."
   - "&b/scadmin reload &fRecarga la configuración."
   - ""
   - "&b/sc author"

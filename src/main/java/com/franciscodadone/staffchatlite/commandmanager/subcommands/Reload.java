@@ -1,19 +1,16 @@
-package com.franciscodadone.staffchatlite.commands.subcommands;
+package com.franciscodadone.staffchatlite.commandmanager.subcommands;
 
+import com.franciscodadone.staffchatlite.StaffChatLite;
 import com.franciscodadone.staffchatlite.permissions.PermissionTable;
 import com.franciscodadone.staffchatlite.storage.Global;
 import com.franciscodadone.staffchatlite.util.Utils;
-import org.bukkit.command.CommandSender;
+import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.chat.TextComponent;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Reload extends SubCommands {
-    @Override
-    public String getDescription() {
-        return null;
-    }
-
     @Override
     public String getName() {
         return "reload";
@@ -31,16 +28,16 @@ public class Reload extends SubCommands {
 
     @Override
     public String getPermission() {
-        return PermissionTable.reload;
+        return PermissionTable.admin;
     }
 
     @Override
     public void perform(CommandSender sender, String[] args) {
         if(sender.hasPermission(getPermission())) {
-            Global.plugin.reloadConfig();
-            Global.langConfig.reloadConfig();
+            Global.config.reload();
+            Global.langConfig.reload();
             new Global();
-            sender.sendMessage(Utils.Color(Global.langConfig.getConfig().getString("prefix") + Global.langConfig.getConfig().getString("reload-message")));
+            sender.sendMessage(new TextComponent(Utils.Color(Global.langConfig.getString("prefix") + Global.langConfig.getString("reload-message"))));
         } else {
             Utils.noPermission(getPermission(), sender);
         }

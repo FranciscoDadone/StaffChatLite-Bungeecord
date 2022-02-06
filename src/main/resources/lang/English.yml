@@ -15,7 +15,6 @@ help-message:
   - "&b/scadmin help &fShows this help."
   - "&b/sc <message> &fSends message to staff chat."
   - "&b/sct &fToggles staff chat."
-  - "&b/scadmin toggle &fToggles staff chat."
   - "&b/scadmin reload &fReload config."
   - ""
   - "&b/sc author"

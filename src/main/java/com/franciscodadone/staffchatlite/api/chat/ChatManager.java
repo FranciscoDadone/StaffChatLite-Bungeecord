@@ -1,16 +1,14 @@
 package com.franciscodadone.staffchatlite.api.chat;
 
-import com.franciscodadone.staffchatlite.api.events.StaffMessageSendEvent;
 import com.franciscodadone.staffchatlite.api.events.StaffToggleEvent;
-import com.franciscodadone.staffchatlite.thirdparty.bungeecord.BungeeCheck;
-import com.franciscodadone.staffchatlite.thirdparty.bungeecord.senders.BungeeSendMessage;
 import com.franciscodadone.staffchatlite.permissions.PermissionTable;
 import com.franciscodadone.staffchatlite.storage.Global;
-import com.franciscodadone.staffchatlite.util.Logger;
 import com.franciscodadone.staffchatlite.util.Utils;
-import org.bukkit.Bukkit;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
+
+import java.util.concurrent.TimeUnit;
 
 public class ChatManager {
 
@@ -19,89 +17,47 @@ public class ChatManager {
      * @param sender
      * @param message
      */
-    public static void sendStaffChatMessage(CommandSender sender, String message) {
-        if(Bukkit.getServer().getOnlinePlayers().size() > 0) {
-            String playerName = (sender instanceof Player) ? ((Player)sender).getPlayerListName() : "Console";
-            if(Global.bungeeEnabled) {
-                if(Global.serverName.equals("Unknown")) {
-                    BungeeCheck.check();
-                }
-                BungeeSendMessage.send(playerName, message, Global.serverName);
-                sendStaffChatMessageFromOtherServer(playerName, message, Global.serverName);
-                Bukkit.getScheduler().runTask(Global.plugin, () -> Bukkit.getServer().getPluginManager().callEvent(new StaffMessageSendEvent(message, sender, Global.serverName)));
-            } else {
-                sendStaffChatMessage(playerName, message);
-                Bukkit.getScheduler().runTask(Global.plugin, () -> Bukkit.getServer().getPluginManager().callEvent(new StaffMessageSendEvent(message, sender, "")));
-            }
-        } else {
-            Logger.warning("Could not send staff chat message because there is no one online.");
-        }
-    }
+    public static void sendStaffChatMessage(CommandSender sender, String message, String serverName) {
+        String playerName = (sender instanceof ProxiedPlayer) ? ((ProxiedPlayer)sender).getDisplayName() : "Console";
+        String toSend = Global.config.getString("chat-style");
 
-    /**
-     * Sends staff chat message with server name in front.
-     * @param playerName
-     * @param message
-     * @param serverName
-     */
-    public static void sendStaffChatMessageFromOtherServer(String playerName, String message, String serverName) {
-        String toSend = Global.plugin.getConfig().getString("chat-style");
         toSend = toSend.replace("%player%", playerName);
-        toSend = toSend.replace("%prefix%", Global.langConfig.getConfig().getString("prefix"));
+        toSend = toSend.replace("%prefix%", Global.langConfig.getString("prefix"));
         toSend = toSend.replace("%message%", message);
-        toSend = toSend.replace("%server%", "(" + serverName + ")");
-        for(Player p : Bukkit.getServer().getOnlinePlayers()) {
+        toSend = toSend.replace("%server%", (!playerName.equals("Console")) ? "(" + serverName + ")" : "");
+        for(ProxiedPlayer p : Global.plugin.getProxy().getPlayers()) {
             if(p.hasPermission(PermissionTable.chat)) {
-                p.sendMessage(Utils.Color(toSend));
+                p.sendMessage(new TextComponent(Utils.Color(toSend)));
             }
         }
-        Bukkit.getConsoleSender().sendMessage(Utils.Color(toSend));
-    }
-
-    /**
-     * Sends staff chat message without server name.
-     * @param playerName
-     * @param message
-     */
-    public static void sendStaffChatMessage(String playerName, String message) {
-        String toSend = Global.plugin.getConfig().getString("chat-style");
-        toSend = toSend.replace("%player%", playerName);
-        toSend = toSend.replace("%prefix%", Global.langConfig.getConfig().getString("prefix"));
-        toSend = toSend.replace("%message%", message);
-        toSend = toSend.replace("%server%", "");
-        for(Player p : Bukkit.getServer().getOnlinePlayers()) {
-            if(p.hasPermission(PermissionTable.chat)) {
-                p.sendMessage(Utils.Color(toSend));
-            }
-        }
-        Bukkit.getConsoleSender().sendMessage(Utils.Color(toSend));
+        Global.plugin.getProxy().getConsole().sendMessage(new TextComponent(Utils.Color(toSend)));
     }
 
     /**
      * Toggles staff chat. /sct
      * @param player
      */
-    public static void toggleStaffChat(Player player) {
+    public static void toggleStaffChat(ProxiedPlayer player) {
         if(!Global.playersToggledStaffChat.contains(player)) {
             Global.playersToggledStaffChat.add(player);
-            Bukkit.getScheduler().runTask(Global.plugin, () -> Bukkit.getServer().getPluginManager().callEvent(new StaffToggleEvent(player, true)));
+            Global.plugin.getProxy().getScheduler().schedule(Global.plugin, () -> Global.plugin.getProxy().getPluginManager().callEvent(new StaffToggleEvent(player, true)), 1, TimeUnit.MILLISECONDS);
         } else {
             Global.playersToggledStaffChat.remove(player);
-            Bukkit.getScheduler().runTask(Global.plugin, () -> Bukkit.getServer().getPluginManager().callEvent(new StaffToggleEvent(player, false)));
+            Global.plugin.getProxy().getScheduler().schedule(Global.plugin, () -> Global.plugin.getProxy().getPluginManager().callEvent(new StaffToggleEvent(player, false)), 1, TimeUnit.MILLISECONDS);
         }
     }
 
     public static void sendStaffChatMessageFromDiscord(String message, String username) {
-        String toSend = Global.plugin.getConfig().getString("chat-style-from-discord");
+        String toSend = Global.config.getString("chat-style-from-discord");
         toSend = toSend.replace("%username%", username);
-        toSend = toSend.replace("%prefix%", Global.langConfig.getConfig().getString("prefix"));
+        toSend = toSend.replace("%prefix%", Global.langConfig.getString("prefix"));
         toSend = toSend.replace("%message%", message);
-        for(Player p : Bukkit.getServer().getOnlinePlayers()) {
+        for(ProxiedPlayer p : Global.plugin.getProxy().getPlayers()) {
             if(p.hasPermission(PermissionTable.chat)) {
-                p.sendMessage(Utils.Color(toSend));
+                p.sendMessage(new TextComponent(Utils.Color(toSend)));
             }
         }
-        Bukkit.getConsoleSender().sendMessage(Utils.Color(toSend));
+        Global.plugin.getProxy().getConsole().sendMessage(new TextComponent(Utils.Color(toSend)));
     }
 
 }

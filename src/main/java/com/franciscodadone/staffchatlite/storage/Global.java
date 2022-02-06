@@ -1,28 +1,28 @@
 package com.franciscodadone.staffchatlite.storage;
 
 import com.franciscodadone.staffchatlite.StaffChatLite;
-import org.bukkit.entity.Player;
+import com.franciscodadone.staffchatlite.config.Config;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
+
+import java.io.File;
 import java.util.ArrayList;
 
 public class Global {
 
     public Global() {
-        Global.langConfig =  new LangConfig();
+        config =  new Config();
+        config.load("config.yml");
+
+        langConfig =  new Config();
+        langConfig.load("lang" + File.separator + config.getString("lang-file"));
+
         playersToggledStaffChat = new ArrayList<>();
-        bungeeEnabled = false;
-        serverName = "Unknown";
-        discordSRVEnabled = false;
+        plugin = StaffChatLite.instance;
     }
 
     public static StaffChatLite plugin;
-    public static LangConfig langConfig;
-    public static ArrayList<Player> playersToggledStaffChat;
-
-    // Bungee
-    public static String serverName;
-    public static boolean bungeeEnabled;
-
-    // DiscordSRV
-    public static boolean discordSRVEnabled;
+    public static Config langConfig;
+    public static Config config;
+    public static ArrayList<ProxiedPlayer> playersToggledStaffChat;
 
 }

@@ -1,24 +1,12 @@
 package com.franciscodadone.staffchatlite.api.events;
 
-import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
-import org.bukkit.event.HandlerList;
-import org.jetbrains.annotations.NotNull;
+import net.md_5.bungee.api.connection.ProxiedPlayer;
+import net.md_5.bungee.api.plugin.Event;
 
 public class StaffToggleEvent extends Event {
-    public StaffToggleEvent(Player sender, boolean isToggled) {
+    public StaffToggleEvent(ProxiedPlayer sender, boolean isToggled) {
         this.player = sender;
         this.isToggled = isToggled;
-    }
-
-    @NotNull
-    @Override
-    public HandlerList getHandlers() {
-        return handlers;
-    }
-
-    public static HandlerList getHandlerList() {
-        return handlers;
     }
 
     public boolean isCancelled() {
@@ -29,7 +17,7 @@ public class StaffToggleEvent extends Event {
         cancelled = cancel;
     }
 
-    public Player getPlayer() {
+    public ProxiedPlayer getPlayer() {
         return player;
     }
 
@@ -37,8 +25,7 @@ public class StaffToggleEvent extends Event {
         return isToggled;
     }
 
-    private Player player;
+    private ProxiedPlayer player;
     private boolean isToggled;
     private boolean cancelled;
-    private static final HandlerList handlers = new HandlerList();
 }

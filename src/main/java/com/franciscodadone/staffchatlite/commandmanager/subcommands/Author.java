@@ -1,16 +1,12 @@
-package com.franciscodadone.staffchatlite.commands.subcommands;
+package com.franciscodadone.staffchatlite.commandmanager.subcommands;
 
 import com.franciscodadone.staffchatlite.util.Utils;
-import org.bukkit.command.CommandSender;
+import net.md_5.bungee.api.CommandSender;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Author extends SubCommands {
-    @Override
-    public String getDescription() {
-        return null;
-    }
 
     @Override
     public String getName() {

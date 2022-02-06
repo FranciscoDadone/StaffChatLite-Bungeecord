@@ -9,9 +9,9 @@
     <version>1.2.0</version>
     <packaging>jar</packaging>
 
-    <name>StaffChatLite</name>
+    <name>StaffChatLite-Bungeecord</name>
 
-    <description>Simple and easy to use staff chat plugin.</description>
+    <description>Simple and easy to use staff chat plugin. (Bungeecord version)</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,53 +19,23 @@
 
     <repositories>
         <repository>
-            <id>spigotmc-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-        </repository>
-        <repository>
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
-        <repository>
-            <id>maven-central</id>
-            <url>https://oss.sonatype.org/content/groups/public</url>
-        </repository>
-
-<!--        DiscordSRV-->
-        <repository>
-            <id>Scarsz-Nexus</id>
-            <url>https://nexus.scarsz.me/content/groups/public/</url>
-        </repository>
-<!--        -->
     </repositories>
 
     <dependencies>
         <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.14.1-R0.1-SNAPSHOT</version>
+            <groupId>net.md-5</groupId>
+            <artifactId>bungeecord-api</artifactId>
+            <version>1.16-R0.5-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.tchristofferson</groupId>
-            <artifactId>ConfigUpdater</artifactId>
-            <version>2.0-SNAPSHOT</version>
+            <groupId>net.dv8tion</groupId>
+            <artifactId>JDA</artifactId>
+            <version>5.0.0-alpha.5</version>
         </dependency>
-
-        <!-- discordsrv -->
-        <dependency>
-            <groupId>com.discordsrv</groupId>
-            <artifactId>discordsrv</artifactId>
-            <version>1.24.0</version>
-            <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>net.kyori</groupId>
-                    <artifactId>adventure-platform-bukkit</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
     </dependencies>
 
     <build>

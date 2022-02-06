@@ -1,9 +1,7 @@
 package com.franciscodadone.staffchatlite.api.events;
 
-import org.bukkit.command.CommandSender;
-import org.bukkit.event.Event;
-import org.bukkit.event.HandlerList;
-import org.jetbrains.annotations.NotNull;
+import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.plugin.Event;
 
 public class StaffMessageSendEvent extends Event {
 
@@ -11,16 +9,6 @@ public class StaffMessageSendEvent extends Event {
         this.message = message;
         this.sender = sender;
         this.serverName = serverName;
-    }
-
-    @NotNull
-    @Override
-    public HandlerList getHandlers() {
-        return handlers;
-    }
-
-    public static HandlerList getHandlerList() {
-        return handlers;
     }
 
     public boolean isCancelled() {
@@ -47,5 +35,4 @@ public class StaffMessageSendEvent extends Event {
     private String serverName;
     private CommandSender sender;
     private boolean cancelled;
-    private static final HandlerList handlers = new HandlerList();
 }
