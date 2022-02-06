@@ -1,6 +1,7 @@
 package com.franciscodadone.staffchatlite;
 
 import com.franciscodadone.staffchatlite.commandmanager.commands.SCCommand;
+import com.franciscodadone.staffchatlite.commandmanager.commands.SCMuteCommand;
 import com.franciscodadone.staffchatlite.commandmanager.commands.SCTCommand;
 import com.franciscodadone.staffchatlite.config.Config;
 import com.franciscodadone.staffchatlite.commandmanager.commands.SCAdminCommand;
@@ -74,6 +75,7 @@ public final class StaffChatLite extends Plugin {
         ProxyServer.getInstance().getPluginManager().registerCommand(this, new SCAdminCommand());
         ProxyServer.getInstance().getPluginManager().registerCommand(this, new SCCommand());
         ProxyServer.getInstance().getPluginManager().registerCommand(this, new SCTCommand());
+        ProxyServer.getInstance().getPluginManager().registerCommand(this, new SCMuteCommand());
 
         // // Update checker // //
         new UpdateChecker(99628).getVersion(version -> {

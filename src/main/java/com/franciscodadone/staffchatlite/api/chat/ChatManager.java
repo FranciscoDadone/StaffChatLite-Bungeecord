@@ -10,8 +10,6 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.connection.Server;
 
-import java.util.concurrent.TimeUnit;
-
 public class ChatManager {
 
     /**
@@ -26,14 +24,14 @@ public class ChatManager {
         Global.plugin.getProxy().getPluginManager().callEvent(sendEvent);
 
         if(!sendEvent.isCancelled()) {
-            String toSend = Global.config.getString("chat-style");
+            String toSend = Global.langConfig.getString("chat-style");
 
             toSend = toSend.replace("%player%", playerName);
             toSend = toSend.replace("%prefix%", Global.langConfig.getString("prefix"));
             toSend = toSend.replace("%message%", message);
             toSend = toSend.replace("%server%", (!playerName.equals("Console")) ? "(" + serverName + ")" : "");
             for(ProxiedPlayer p : Global.plugin.getProxy().getPlayers()) {
-                if(p.hasPermission(PermissionTable.chat)) {
+                if(p.hasPermission(PermissionTable.chat) && !Global.playersToggledSCMute.contains(p)) {
                     p.sendMessage(new TextComponent(Utils.Color(toSend)));
                 }
             }
@@ -49,15 +47,15 @@ public class ChatManager {
         StaffToggleEvent toggleEvent;
         if(!Global.playersToggledStaffChat.contains(player)) {
             toggleEvent = new StaffToggleEvent(player, true);
+            ProxyServer.getInstance().getPluginManager().callEvent(toggleEvent);
             if(toggleEvent.isCancelled()) return;
             Global.playersToggledStaffChat.add(player);
-            Global.plugin.getProxy().getScheduler().schedule(Global.plugin, () -> Global.plugin.getProxy().getPluginManager().callEvent(new StaffToggleEvent(player, true)), 1, TimeUnit.MILLISECONDS);
             player.sendMessage(new TextComponent(Utils.Color(Global.langConfig.getString("prefix") + " " + Global.langConfig.getString("toggle-on"))));
         } else {
             toggleEvent = new StaffToggleEvent(player, false);
+            ProxyServer.getInstance().getPluginManager().callEvent(toggleEvent);
             if(toggleEvent.isCancelled()) return;
             Global.playersToggledStaffChat.remove(player);
-            Global.plugin.getProxy().getScheduler().schedule(Global.plugin, () -> Global.plugin.getProxy().getPluginManager().callEvent(new StaffToggleEvent(player, false)), 1, TimeUnit.MILLISECONDS);
             player.sendMessage(new TextComponent(Utils.Color(Global.langConfig.getString("prefix") + " " + Global.langConfig.getString("toggle-off"))));
         }
     }
@@ -68,7 +66,7 @@ public class ChatManager {
         toSend = toSend.replace("%prefix%", Global.langConfig.getString("prefix"));
         toSend = toSend.replace("%message%", message);
         for(ProxiedPlayer p : Global.plugin.getProxy().getPlayers()) {
-            if(p.hasPermission(PermissionTable.chat)) {
+            if(p.hasPermission(PermissionTable.chat) && !Global.playersToggledSCMute.contains(p)) {
                 p.sendMessage(new TextComponent(Utils.Color(toSend)));
             }
         }
@@ -81,14 +79,14 @@ public class ChatManager {
         ProxyServer.getInstance().getPluginManager().callEvent(joinEvent);
         if(joinEvent.isCancelled()) return;
 
-        String toSend = Global.config.getString("chat-style-join-message");
+        String toSend = Global.langConfig.getString("chat-style-join-message");
 
         toSend = toSend.replace("%player%", player.getDisplayName());
         toSend = toSend.replace("%prefix%", Global.langConfig.getString("prefix"));
         toSend = toSend.replace("%server%", player.getServer().getInfo().getName());
 
         for(ProxiedPlayer p : Global.plugin.getProxy().getPlayers()) {
-            if(p.hasPermission(PermissionTable.chat)) {
+            if(p.hasPermission(PermissionTable.chat) && !Global.playersToggledSCMute.contains(p)) {
                 p.sendMessage(new TextComponent(Utils.Color(toSend)));
             }
         }
@@ -101,13 +99,13 @@ public class ChatManager {
         ProxyServer.getInstance().getPluginManager().callEvent(leaveEvent);
         if(leaveEvent.isCancelled()) return;
 
-        String toSend = Global.config.getString("chat-style-leave-message");
+        String toSend = Global.langConfig.getString("chat-style-leave-message");
 
         toSend = toSend.replace("%player%", player.getDisplayName());
         toSend = toSend.replace("%prefix%", Global.langConfig.getString("prefix"));
 
         for(ProxiedPlayer p : Global.plugin.getProxy().getPlayers()) {
-            if(p.hasPermission(PermissionTable.chat)) {
+            if(p.hasPermission(PermissionTable.chat) && !Global.playersToggledSCMute.contains(p)) {
                 p.sendMessage(new TextComponent(Utils.Color(toSend)));
             }
         }
@@ -120,7 +118,7 @@ public class ChatManager {
         ProxyServer.getInstance().getPluginManager().callEvent(leaveEvent);
         if(leaveEvent.isCancelled()) return;
 
-        String toSend = Global.config.getString("chat-style-switch-message");
+        String toSend = Global.langConfig.getString("chat-style-switch-message");
 
         toSend = toSend.replace("%player%", player.getDisplayName());
         toSend = toSend.replace("%prefix%", Global.langConfig.getString("prefix"));
@@ -128,11 +126,28 @@ public class ChatManager {
         toSend = toSend.replace("%serverFrom%", serverFrom);
 
         for(ProxiedPlayer p : Global.plugin.getProxy().getPlayers()) {
-            if(p.hasPermission(PermissionTable.chat)) {
+            if(p.hasPermission(PermissionTable.chat) && !Global.playersToggledSCMute.contains(p)) {
                 p.sendMessage(new TextComponent(Utils.Color(toSend)));
             }
         }
         Global.plugin.getProxy().getConsole().sendMessage(new TextComponent(Utils.Color(toSend)));
     }
 
+    public static void toggleStaffChatMute(ProxiedPlayer player) {
+        StaffToggleMuteEvent toggleEvent;
+        if(!Global.playersToggledSCMute.contains(player)) {
+            toggleEvent = new StaffToggleMuteEvent(player, true);
+            ProxyServer.getInstance().getPluginManager().callEvent(toggleEvent);
+            if(toggleEvent.isCancelled()) return;
+            Global.playersToggledSCMute.add(player);
+            player.sendMessage(new TextComponent(Utils.Color(Global.langConfig.getString("prefix") + " " + Global.langConfig.getString("sc-mute-toggle-on"))));
+        } else {
+            toggleEvent = new StaffToggleMuteEvent(player, false);
+            ProxyServer.getInstance().getPluginManager().callEvent(toggleEvent);
+            if(toggleEvent.isCancelled()) return;
+            Global.playersToggledSCMute.remove(player);
+            player.sendMessage(new TextComponent(Utils.Color(Global.langConfig.getString("prefix") + " " + Global.langConfig.getString("sc-mute-toggle-off"))));
+        }
+
+    }
 }

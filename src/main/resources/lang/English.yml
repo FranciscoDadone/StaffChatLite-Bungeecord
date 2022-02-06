@@ -7,7 +7,6 @@
 ##
 
 prefix: "&9[&bSC&9]"
-
 reload-message: "&aConfig reloaded."
 
 help-message:
@@ -22,5 +21,15 @@ help-message:
 
 no-permissions: "&cYou don''t have permission. (%permissionNode%)"
 
+# Chat style when staff chat message comes up.
+chat-style: "%prefix% &7%server% &c%player%&f: &b%message%"
+chat-style-join-message: "%prefix% &c%player% &bjoined the network. &7(%server%)"
+chat-style-leave-message: "%prefix% &c%player% &bleft the network."
+chat-style-switch-message: "%prefix% &c%player% &bjoined &7%serverTo% &bfrom &7%serverFrom%"
+
 toggle-on: "&bToggled &a&lON"
 toggle-off: "&bToggled &c&lOFF"
+
+sc-mute-toggle-on: "&bStaffChat muted. &7&o(Now you don't receive staff messages)"
+sc-mute-toggle-off: "&bStaffChat unmuted. &7&o(Now you receive staff messages)"
+

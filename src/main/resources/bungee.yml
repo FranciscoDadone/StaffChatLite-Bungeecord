@@ -2,5 +2,39 @@ name: StaffChatLite
 version: '${project.version}'
 main: com.franciscodadone.staffchatlite.StaffChatLite
 prefix: StaffChatLite
-authors: "DadoGamer13"
+author: DadoGamer13
 description: Simple and easy to use staff chat plugin.
+
+commands:
+  staffchat:
+    permission: "staffchatlite.chat"
+    usage: "/staffchat"
+  sc:
+    permission: "staffchatlite.chat"
+    usage: "/sc"
+  scadmin:
+    permissions: "staffchatlite.admin"
+    usage: "/scadmin"
+  scmute:
+    permissions: "staffchatlite.togglemute"
+    usage: "/schelp"
+  sct:
+    permission: "staffchatlite.toggle"
+    usage: "/sct"
+
+permissions:
+  staffchatlite.*:
+    default: op
+    description: "Gives all permssions."
+  staffchatlite.admin:
+    default: op
+    description: "Admin commands."
+  staffchatlite.chat:
+    default: op
+    description: "Send and receive staff chat messages"
+  staffchatlite.toggle:
+    default: op
+    description: "Toggles on/off staff chat"
+  staffchatlite.togglemute:
+    default: op
+    description: "Toggles staff chat mute."

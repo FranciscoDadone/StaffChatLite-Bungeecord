@@ -10,13 +10,15 @@ import java.util.ArrayList;
 public class Global {
 
     public Global() {
-        config =  new Config();
+        config = new Config();
         config.load("config.yml");
 
-        langConfig =  new Config();
+        langConfig = new Config();
         langConfig.load("lang" + File.separator + config.getString("lang-file"));
 
         playersToggledStaffChat = new ArrayList<>();
+        playersToggledSCMute = new ArrayList<>();
+
         plugin = StaffChatLite.instance;
     }
 
@@ -24,5 +26,6 @@ public class Global {
     public static Config langConfig;
     public static Config config;
     public static ArrayList<ProxiedPlayer> playersToggledStaffChat;
+    public static ArrayList<ProxiedPlayer> playersToggledSCMute;
 
 }
