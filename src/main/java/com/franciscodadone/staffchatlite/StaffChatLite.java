@@ -90,8 +90,9 @@ public final class StaffChatLite extends Plugin {
         });
 
         // Metrics and lang file chart
-        Metrics metrics = new Metrics(this, 14124);
+        Metrics metrics = new Metrics(this, 14211);
         metrics.addCustomChart(new Metrics.SimplePie("lang_file", () -> Global.config.getString("lang-file")));
+        metrics.addCustomChart(new Metrics.SimplePie("discord_enabled", () -> String.valueOf(Global.config.getBoolean("discord-enabled"))));
 
         // Discord integration
         if(Global.config.getBoolean("discord-enabled")){
