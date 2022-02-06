@@ -5,7 +5,9 @@ import com.franciscodadone.staffchatlite.commandmanager.commands.SCTCommand;
 import com.franciscodadone.staffchatlite.config.Config;
 import com.franciscodadone.staffchatlite.commandmanager.commands.SCAdminCommand;
 import com.franciscodadone.staffchatlite.events.ChatEvent;
-import com.franciscodadone.staffchatlite.events.PlayerJoin;
+import com.franciscodadone.staffchatlite.events.PlayerJoinEvent;
+import com.franciscodadone.staffchatlite.events.PlayerLeaveEvent;
+import com.franciscodadone.staffchatlite.events.PlayerSwitchEvent;
 import com.franciscodadone.staffchatlite.storage.Global;
 import com.franciscodadone.staffchatlite.thirdparty.bstats.Metrics;
 import com.franciscodadone.staffchatlite.util.Logger;
@@ -13,7 +15,6 @@ import com.franciscodadone.staffchatlite.util.UpdateChecker;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
 import java.io.File;
-import java.io.IOException;
 import java.util.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
@@ -29,8 +30,9 @@ public final class StaffChatLite extends Plugin {
 
         // Events
         getProxy().getPluginManager().registerListener(this, new ChatEvent());
-        getProxy().getPluginManager().registerListener(this, new PlayerJoin());
-
+        getProxy().getPluginManager().registerListener(this, new PlayerJoinEvent());
+        getProxy().getPluginManager().registerListener(this, new PlayerLeaveEvent());
+        getProxy().getPluginManager().registerListener(this, new PlayerSwitchEvent());
 
         // Loading Lang config
         // Getting all lang files from jar
@@ -87,8 +89,6 @@ public final class StaffChatLite extends Plugin {
         // Metrics and lang file chart
         Metrics metrics = new Metrics(this, 14124);
         metrics.addCustomChart(new Metrics.SimplePie("lang_file", () -> Global.config.getString("lang-file")));
-
-        System.out.println(Global.config.getString("a"));
 
     }
 

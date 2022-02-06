@@ -60,4 +60,49 @@ public class ChatManager {
         Global.plugin.getProxy().getConsole().sendMessage(new TextComponent(Utils.Color(toSend)));
     }
 
+    public static void sendJoinMessage(ProxiedPlayer player) {
+        String toSend = Global.config.getString("chat-style-join-message");
+
+        toSend = toSend.replace("%player%", player.getDisplayName());
+        toSend = toSend.replace("%prefix%", Global.langConfig.getString("prefix"));
+        toSend = toSend.replace("%server%", player.getServer().getInfo().getName());
+
+        for(ProxiedPlayer p : Global.plugin.getProxy().getPlayers()) {
+            if(p.hasPermission(PermissionTable.chat)) {
+                p.sendMessage(new TextComponent(Utils.Color(toSend)));
+            }
+        }
+        Global.plugin.getProxy().getConsole().sendMessage(new TextComponent(Utils.Color(toSend)));
+    }
+
+    public static void sendLeaveMessage(ProxiedPlayer player) {
+        String toSend = Global.config.getString("chat-style-leave-message");
+
+        toSend = toSend.replace("%player%", player.getDisplayName());
+        toSend = toSend.replace("%prefix%", Global.langConfig.getString("prefix"));
+
+        for(ProxiedPlayer p : Global.plugin.getProxy().getPlayers()) {
+            if(p.hasPermission(PermissionTable.chat)) {
+                p.sendMessage(new TextComponent(Utils.Color(toSend)));
+            }
+        }
+        Global.plugin.getProxy().getConsole().sendMessage(new TextComponent(Utils.Color(toSend)));
+    }
+
+    public static void sendSwitchMessage(ProxiedPlayer player, String serverFrom, String serverTo) {
+        String toSend = Global.config.getString("chat-style-switch-message");
+
+        toSend = toSend.replace("%player%", player.getDisplayName());
+        toSend = toSend.replace("%prefix%", Global.langConfig.getString("prefix"));
+        toSend = toSend.replace("%serverTo%", serverTo);
+        toSend = toSend.replace("%serverFrom%", serverFrom);
+
+        for(ProxiedPlayer p : Global.plugin.getProxy().getPlayers()) {
+            if(p.hasPermission(PermissionTable.chat)) {
+                p.sendMessage(new TextComponent(Utils.Color(toSend)));
+            }
+        }
+        Global.plugin.getProxy().getConsole().sendMessage(new TextComponent(Utils.Color(toSend)));
+    }
+
 }
