@@ -33,3 +33,10 @@ toggle-off: "&bToggled &c&lOFF"
 sc-mute-toggle-on: "&bStaffChat muted. &7&o(Now you don't receive staff messages)"
 sc-mute-toggle-off: "&bStaffChat unmuted. &7&o(Now you receive staff messages)"
 
+###############
+#   Discord   #
+###############
+chat-style-from-discord: "%prefix%&9[Discord] &c%username%&f: %message%"
+discord-join-message: "%player% joined the network. (%server%)"
+discord-leave-message: "%player% left the network."
+discord-switch-message: "%player% joined %serverTo% from %serverFrom%."

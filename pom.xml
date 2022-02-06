@@ -36,6 +36,11 @@
             <artifactId>JDA</artifactId>
             <version>5.0.0-alpha.5</version>
         </dependency>
+        <dependency>
+            <groupId>net.dv8tion</groupId>
+            <artifactId>JDA</artifactId>
+            <version>5.0.0-alpha.5</version>
+        </dependency>
     </dependencies>
 
     <build>

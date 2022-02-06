@@ -3,6 +3,7 @@ package com.franciscodadone.staffchatlite.api.chat;
 import com.franciscodadone.staffchatlite.api.events.*;
 import com.franciscodadone.staffchatlite.permissions.PermissionTable;
 import com.franciscodadone.staffchatlite.storage.Global;
+import com.franciscodadone.staffchatlite.thirdparty.discord.DiscordHandler;
 import com.franciscodadone.staffchatlite.util.Utils;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
@@ -36,6 +37,7 @@ public class ChatManager {
                 }
             }
             Global.plugin.getProxy().getConsole().sendMessage(new TextComponent(Utils.Color(toSend)));
+            DiscordHandler.sendMessage(message, playerName, (!playerName.equals("Console")) ? serverName : "");
         }
     }
 
@@ -60,19 +62,6 @@ public class ChatManager {
         }
     }
 
-    public static void sendStaffChatMessageFromDiscord(String message, String username) {
-        String toSend = Global.config.getString("chat-style-from-discord");
-        toSend = toSend.replace("%username%", username);
-        toSend = toSend.replace("%prefix%", Global.langConfig.getString("prefix"));
-        toSend = toSend.replace("%message%", message);
-        for(ProxiedPlayer p : Global.plugin.getProxy().getPlayers()) {
-            if(p.hasPermission(PermissionTable.chat) && !Global.playersToggledSCMute.contains(p)) {
-                p.sendMessage(new TextComponent(Utils.Color(toSend)));
-            }
-        }
-        Global.plugin.getProxy().getConsole().sendMessage(new TextComponent(Utils.Color(toSend)));
-    }
-
     public static void sendJoinMessage(ProxiedPlayer player) {
 
         StaffJoinEvent joinEvent = new StaffJoinEvent(player, player.getServer());
@@ -91,6 +80,7 @@ public class ChatManager {
             }
         }
         Global.plugin.getProxy().getConsole().sendMessage(new TextComponent(Utils.Color(toSend)));
+        DiscordHandler.sendJoinMessage(player.getDisplayName(), player.getServer().getInfo().getName());
     }
 
     public static void sendLeaveMessage(ProxiedPlayer player) {
@@ -110,6 +100,7 @@ public class ChatManager {
             }
         }
         Global.plugin.getProxy().getConsole().sendMessage(new TextComponent(Utils.Color(toSend)));
+        DiscordHandler.sendLeaveMessage(player.getDisplayName());
     }
 
     public static void sendSwitchMessage(ProxiedPlayer player, String serverFrom, Server serverTo) {
@@ -131,6 +122,7 @@ public class ChatManager {
             }
         }
         Global.plugin.getProxy().getConsole().sendMessage(new TextComponent(Utils.Color(toSend)));
+        DiscordHandler.sendSwitchMessage(player.getDisplayName(), serverFrom, serverTo.getInfo().getName());
     }
 
     public static void toggleStaffChatMute(ProxiedPlayer player) {
@@ -148,6 +140,18 @@ public class ChatManager {
             Global.playersToggledSCMute.remove(player);
             player.sendMessage(new TextComponent(Utils.Color(Global.langConfig.getString("prefix") + " " + Global.langConfig.getString("sc-mute-toggle-off"))));
         }
+    }
 
+    public static void sendStaffChatMessageFromDiscord(String message, String username) {
+        String toSend = Global.langConfig.getString("chat-style-from-discord");
+        toSend = toSend.replace("%username%", username);
+        toSend = toSend.replace("%prefix%", Global.langConfig.getString("prefix"));
+        toSend = toSend.replace("%message%", message);
+        for(ProxiedPlayer p : Global.plugin.getProxy().getPlayers()) {
+            if(p.hasPermission(PermissionTable.chat) && !Global.playersToggledSCMute.contains(p)) {
+                p.sendMessage(new TextComponent(Utils.Color(toSend)));
+            }
+        }
+        Global.plugin.getProxy().getConsole().sendMessage(new TextComponent(Utils.Color(toSend)));
     }
 }

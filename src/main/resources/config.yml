@@ -14,6 +14,12 @@ sc-send-alias: "# "
 #########################
 #  Discord Integration  #
 #########################
+discord-enabled: false
+# Bot token. You can create your bot and get the token from here:
+# https://discord.com/developers/applications/
+discord-bot-token: "0000000000000"
 # ChannelId where StaffChat messages will be shown
-discord-staff-channel-id: "0000000000000"
-chat-style-from-discord: "%prefix%&9[Discord] &c%username%&f: %message%"
+discord-staff-channel-id: "000000000000000"
+discord-send-staff-messages: true
+discord-send-join-leave-messages: true
+discord-send-switch-messages: true

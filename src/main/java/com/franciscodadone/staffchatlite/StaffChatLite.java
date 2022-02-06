@@ -11,6 +11,7 @@ import com.franciscodadone.staffchatlite.listeners.PlayerLeaveEvent;
 import com.franciscodadone.staffchatlite.listeners.PlayerSwitchEvent;
 import com.franciscodadone.staffchatlite.storage.Global;
 import com.franciscodadone.staffchatlite.thirdparty.bstats.Metrics;
+import com.franciscodadone.staffchatlite.thirdparty.discord.DiscordHandler;
 import com.franciscodadone.staffchatlite.util.Logger;
 import com.franciscodadone.staffchatlite.util.UpdateChecker;
 import net.md_5.bungee.api.ProxyServer;
@@ -91,6 +92,11 @@ public final class StaffChatLite extends Plugin {
         // Metrics and lang file chart
         Metrics metrics = new Metrics(this, 14124);
         metrics.addCustomChart(new Metrics.SimplePie("lang_file", () -> Global.config.getString("lang-file")));
+
+        // Discord integration
+        if(Global.config.getBoolean("discord-enabled")){
+            new DiscordHandler().build();
+        }
 
     }
 
