@@ -19,7 +19,7 @@ public class SCCommand extends Command {
                 for(String arg : args) {
                     message.append(arg).append(" ");
                 }
-                ChatManager.sendStaffChatMessage(sender, message.toString(), ((ProxiedPlayer)sender).getServer().getInfo().getName());
+                ChatManager.sendStaffChatMessage(sender, message.toString(), (sender instanceof ProxiedPlayer) ? ((ProxiedPlayer)sender).getServer().getInfo().getName() : "");
             }
         }
     }

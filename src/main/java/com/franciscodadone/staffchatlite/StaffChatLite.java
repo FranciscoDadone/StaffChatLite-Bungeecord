@@ -88,6 +88,8 @@ public final class StaffChatLite extends Plugin {
         Metrics metrics = new Metrics(this, 14124);
         metrics.addCustomChart(new Metrics.SimplePie("lang_file", () -> Global.config.getString("lang-file")));
 
+        System.out.println(Global.config.getString("a"));
+
     }
 
     @Override

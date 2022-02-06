@@ -1,6 +1,7 @@
 package com.franciscodadone.staffchatlite.config;
 
 import com.franciscodadone.staffchatlite.StaffChatLite;
+import com.franciscodadone.staffchatlite.util.Logger;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
@@ -8,6 +9,8 @@ import net.md_5.bungee.config.YamlConfiguration;
 import java.io.File;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Config {
@@ -43,7 +46,6 @@ public class Config {
             ex.printStackTrace();
             return false;
         }
-
         return true;
     }
 
@@ -52,26 +54,40 @@ public class Config {
     }
 
     public String getString(String path) {
-        if(null == configuration)
-            return null;
+        if(null == configuration) return null;
+        if(!configuration.contains(path)) {
+            Logger.severe("Config outdated! (" + path + ") Check the new config in: https://github.com/FranciscoDadone/StaffChatLite-Bungeecord/tree/master/src/main/resources");
+            return "Outdated config! Contact an administrator.";
+        }
         return configuration.getString(path);
     }
 
     public Boolean getBoolean(String path) {
-        if(null == configuration)
+        if(null == configuration) return null;
+        if(!configuration.contains(path)) {
+            Logger.severe("Config outdated! (" + path + ") Check the new config in: https://github.com/FranciscoDadone/StaffChatLite-Bungeecord/tree/master/src/main/resources");
             return null;
+        }
         return configuration.getBoolean(path);
     }
 
     public Integer getInteger(String path) {
-        if(null == configuration)
+        if(null == configuration) return null;
+        if(!configuration.contains(path)) {
+            Logger.severe("Config outdated! (" + path + ") Check the new config in: https://github.com/FranciscoDadone/StaffChatLite-Bungeecord/tree/master/src/main/resources");
             return null;
+        }
+
         return configuration.getInt(path);
     }
 
     public List<String> getStringList(String path) {
-        if(null == configuration)
-            return null;
+        if(null == configuration) return null;
+        if(!configuration.contains(path)) {
+            Logger.severe("Config outdated! (" + path + ") Check the new config in: https://github.com/FranciscoDadone/StaffChatLite-Bungeecord/tree/master/src/main/resources");
+            return Collections.singletonList("Outdated config! Contact an administrator.");
+        }
+
         return configuration.getStringList(path);
     }
 
