@@ -31,7 +31,9 @@ public class Config {
 
         if(!configurationFile.exists()) {
             try {
+                System.out.println(fileName);
                 InputStream inputStream = StaffChatLite.instance.getResourceAsStream(fileName);
+                System.out.println(inputStream);
                 Files.copy(inputStream, configurationFile.toPath());
                 inputStream.close();
             } catch (Exception ex) {

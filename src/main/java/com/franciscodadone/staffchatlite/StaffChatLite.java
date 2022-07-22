@@ -65,7 +65,7 @@ public final class StaffChatLite extends Plugin {
         for(String langFile : langFiles) {
             File file = new File(getDataFolder() + File.separator + "lang", langFile);
             if(!file.exists()) {
-                new Config().load("lang" + File.separator + langFile);
+                new Config().load("lang/" + langFile);
             }
         }
 
